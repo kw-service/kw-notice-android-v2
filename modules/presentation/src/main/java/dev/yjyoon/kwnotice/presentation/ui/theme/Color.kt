@@ -1,4 +1,4 @@
-package dev.yjyoon.kwnotice.ui.theme
+package dev.yjyoon.kwnotice.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
