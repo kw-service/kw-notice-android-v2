@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "KW Notice"
-include ':app'
+include(":app")
