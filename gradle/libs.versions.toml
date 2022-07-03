@@ -12,6 +12,8 @@ compose = "1.2.0-beta03"
 material3 = "1.0.0-alpha14"
 dagger = "2.42"
 
+room = "2.4.2"
+
 accompanist = "0.24.9-beta"
 
 okhttp = "4.9.3"
@@ -41,6 +43,11 @@ androidx-compose-navigation = { module = "androidx.navigation:navigation-compose
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0" }
 
 google-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+
+# Room
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 # Network
 retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
