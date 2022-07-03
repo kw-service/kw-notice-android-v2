@@ -40,6 +40,8 @@ dependencies {
 
     implementation(libs.bundles.compose)
 
+    implementation(libs.google.accompanist.webview)
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }
