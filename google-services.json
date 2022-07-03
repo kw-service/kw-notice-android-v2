@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "22635154509",
+    "project_id": "kw-notice",
+    "storage_bucket": "kw-notice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22635154509:android:731f56f8d7ea2c25a9e004",
+        "android_client_info": {
+          "package_name": "dev.yjyoon.kwnotice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22635154509-mukasgpt3nhgfrmvabhvb3hbul6dvsc8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByN8GpaiLUZCwz2QD1I4i8eor5Sor-B0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22635154509-mukasgpt3nhgfrmvabhvb3hbul6dvsc8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22635154509-b0ujpvjhphqim34tucgl9h2dlpj6hh5n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "asdf.asdf.asdf"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
