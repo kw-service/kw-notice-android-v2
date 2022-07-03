@@ -49,7 +49,9 @@ google-services = { module = "com.google.gms:google-services", version.ref = "go
 google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 google-firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 google-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+
 google-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+google-accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
 
 # Room
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }

@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dev.yjyoon.kwnotice.R
-import dev.yjyoon.kwnotice.presentation.MainActivity
+import dev.yjyoon.kwnotice.presentation.ui.webview.WebViewActivity
 
 class FcmService : FirebaseMessagingService() {
 
@@ -25,8 +25,11 @@ class FcmService : FirebaseMessagingService() {
         val notification: RemoteMessage.Notification = message.notification!!
         val data = message.data
 
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val intent = Intent(this, WebViewActivity::class.java).apply {
+            this.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            this.putExtra("url", data["url"])
+        }
+
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)

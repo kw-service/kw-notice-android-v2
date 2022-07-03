@@ -25,6 +25,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".presentation.ui.webview.WebViewActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="FCM_CLICK_ACTION_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".fcm.FcmService"
             android:exported="false">
