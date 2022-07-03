@@ -25,6 +25,9 @@ android {
 dependencies {
     implementation(project(":domain"))
 
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }
