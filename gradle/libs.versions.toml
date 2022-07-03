@@ -71,4 +71,10 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dag
 javax-inject = "javax.inject:javax.inject:1"
 
 [bundles]
-compose = ["androidx-compose-ui-core", "androidx-compose-ui-tooling-core", "androidx-compose-ui-tooling-preview", "androidx-compose-material3", "androidx-activity-compose", "androidx-compose-navigation"]
+compose = ["androidx-compose-ui-core",
+    "androidx-compose-ui-tooling-core",
+    "androidx-compose-ui-tooling-preview",
+    "androidx-compose-material3",
+    "androidx-activity-compose",
+    "androidx-compose-navigation",
+    "androidx-hilt-navigation-compose"]
