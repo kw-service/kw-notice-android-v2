@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.yjyoon.kwnotice"
+    namespace = "dev.yjyoon.kwnotice.presentation"
     compileSdk = 32
 
     defaultConfig {
