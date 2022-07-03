@@ -13,6 +13,7 @@ material3 = "1.0.0-alpha14"
 dagger = "2.42"
 
 room = "2.4.2"
+datastore = "1.0.0"
 
 accompanist = "0.24.9-beta"
 
@@ -48,6 +49,9 @@ google-accompanist-systemuicontroller = { module = "com.google.accompanist:accom
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+
+# Datastore
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # Network
 retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
