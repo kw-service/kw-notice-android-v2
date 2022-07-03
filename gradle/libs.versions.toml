@@ -15,6 +15,8 @@ dagger = "2.42"
 room = "2.4.2"
 datastore = "1.0.0"
 
+google-services = "4.3.13"
+firebase-bom = "30.2.0"
 accompanist = "0.24.9-beta"
 
 okhttp = "4.9.3"
@@ -43,6 +45,10 @@ androidx-compose-material3 = { module = "androidx.compose.material3:material3", 
 androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0" }
 
+google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
+google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+google-firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+google-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 google-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 # Room
