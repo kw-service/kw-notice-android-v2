@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
 }
@@ -44,6 +45,9 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":presentation"))
+
+    implementation(platform(libs.google.firebase.bom))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
