@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -24,6 +25,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.yjyoon.kwnotice.presentation.ui.favorite.FavoriteScreen
 import dev.yjyoon.kwnotice.presentation.ui.notice.NoticeScreen
 import dev.yjyoon.kwnotice.presentation.ui.setting.SettingScreen
+import dev.yjyoon.kwnotice.presentation.ui.theme.KWNoticeTheme
 
 @Composable
 fun MainScreen() {
@@ -85,3 +87,12 @@ fun MainNavigationBar(
         }
     }
 }
+
+@Preview
+@Composable
+private fun MainNavigationBarPreview() {
+    KWNoticeTheme {
+        MainNavigationBar(currentDestination = null, onNavigate = {})
+    }
+}
+
