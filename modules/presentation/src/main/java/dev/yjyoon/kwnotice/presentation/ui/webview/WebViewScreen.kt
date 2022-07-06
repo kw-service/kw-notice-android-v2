@@ -32,8 +32,10 @@ fun WebViewScreen(url: String) {
             state = state,
             modifier = Modifier.weight(1f),
             navigator = navigator,
-            onCreated = { webView ->
-                webView.settings.javaScriptEnabled = true
+            onCreated = {
+                it.settings.javaScriptEnabled = true
+                it.settings.builtInZoomControls = true
+                it.settings.setSupportZoom(true)
             }
         )
     }
