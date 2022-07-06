@@ -6,7 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-val KWNoticeLightColors = lightColorScheme(
+val KwNoticeLightColors = lightColorScheme(
     primary = light_primary,
     onPrimary = light_onPrimary,
     primaryContainer = light_primaryContainer,
@@ -37,7 +37,7 @@ val KWNoticeLightColors = lightColorScheme(
 )
 
 
-val KWNoticeDarkColors = darkColorScheme(
+val KwNoticeDarkColors = darkColorScheme(
     primary = dark_primary,
     onPrimary = dark_onPrimary,
     primaryContainer = dark_primaryContainer,
@@ -68,19 +68,19 @@ val KWNoticeDarkColors = darkColorScheme(
 )
 
 @Composable
-fun KWNoticeTheme(
+fun KwNoticeTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     val colors = if (!useDarkTheme) {
-        KWNoticeLightColors
+        KwNoticeLightColors
     } else {
-        KWNoticeDarkColors
+        KwNoticeDarkColors
     }
 
     MaterialTheme(
         colorScheme = colors,
-        typography = KWNoticeTypography,
+        typography = KwNoticeTypography,
         content = content
     )
 }

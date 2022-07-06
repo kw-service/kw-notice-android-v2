@@ -12,21 +12,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.kwnotice.presentation.R
-import dev.yjyoon.kwnotice.presentation.ui.theme.KWNoticeDarkColors
-import dev.yjyoon.kwnotice.presentation.ui.theme.KWNoticeLightColors
+import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeDarkColors
+import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeLightColors
 
 @Composable
 fun SplashScreen() {
     val isDarkMode = isSystemInDarkTheme()
     val logoTint = if (isDarkMode) {
-        KWNoticeDarkColors.primary
+        KwNoticeDarkColors.primary
     } else {
-        KWNoticeLightColors.primary
+        KwNoticeLightColors.primary
     }
     val backgroundColor = if (isDarkMode) {
-        KWNoticeDarkColors.background
+        KwNoticeDarkColors.background
     } else {
-        KWNoticeLightColors.background
+        KwNoticeLightColors.background
     }
 
     Box(
