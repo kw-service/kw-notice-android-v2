@@ -24,7 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.yjyoon.kwnotice.presentation.ui.favorite.FavoriteScreen
 import dev.yjyoon.kwnotice.presentation.ui.notice.NoticeScreen
-import dev.yjyoon.kwnotice.presentation.ui.setting.SettingScreen
+import dev.yjyoon.kwnotice.presentation.ui.settings.SettingsScreen
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 
 @Composable
@@ -49,7 +49,7 @@ fun MainScreen() {
         ) {
             composable(MainDestination.Notice.route) { NoticeScreen() }
             composable(MainDestination.Favorite.route) { FavoriteScreen() }
-            composable(MainDestination.Settings.route) { SettingScreen() }
+            composable(MainDestination.Settings.route) { SettingsScreen() }
         }
     }
 }

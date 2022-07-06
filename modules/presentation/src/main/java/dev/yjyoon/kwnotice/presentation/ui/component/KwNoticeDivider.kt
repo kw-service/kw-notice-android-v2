@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun KwNoticeDivider(
     horizontalPadding: Dp = 16.dp,
-    verticalPadding: Dp = 8.dp
+    verticalPadding: Dp = 16.dp
 ) {
     Divider(
         Modifier.padding(horizontal = horizontalPadding, vertical = verticalPadding),
