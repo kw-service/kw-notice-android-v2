@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.bundles.compose)
 
     implementation(libs.google.accompanist.webview)
+    implementation(libs.google.accompanist.navigation.animation)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
