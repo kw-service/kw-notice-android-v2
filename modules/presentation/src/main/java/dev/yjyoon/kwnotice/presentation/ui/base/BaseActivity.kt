@@ -13,20 +13,34 @@ import dev.yjyoon.kwnotice.presentation.ui.theme.KWNoticeTheme
 
 abstract class BaseActivity : ComponentActivity() {
 
-    protected fun setScreen(screen: @Composable () -> Unit) = setContent {
-        val systemUiController: SystemUiController = rememberSystemUiController()
-        val isDarkMode = isSystemInDarkTheme()
-        SideEffect {
-            systemUiController.setSystemBarsColor(
-                color = if (isDarkMode) {
-                    KWNoticeDarkColors.background
-                } else {
-                    KWNoticeLightColors.background
-                },
-                darkIcons = !isDarkMode
-            )
-        }
+    protected fun setScreen(
+        isMain: Boolean = false,
+        screen: @Composable () -> Unit
+    ) =
+        setContent {
+            val systemUiController: SystemUiController = rememberSystemUiController()
+            val isDarkMode = isSystemInDarkTheme()
+            SideEffect {
+                systemUiController.setSystemBarsColor(
+                    color = if (isDarkMode) {
+                        KWNoticeDarkColors.background
+                    } else {
+                        KWNoticeLightColors.background
+                    },
+                    darkIcons = !isDarkMode
+                )
+                if (isMain) {
+                    systemUiController.setNavigationBarColor(
+                        color = if (isDarkMode) {
+                            KWNoticeDarkColors.secondaryContainer
+                        } else {
+                            KWNoticeLightColors.secondaryContainer
+                        },
+                        darkIcons = !isDarkMode
+                    )
+                }
+            }
 
-        KWNoticeTheme(content = screen)
-    }
+            KWNoticeTheme(content = screen)
+        }
 }
