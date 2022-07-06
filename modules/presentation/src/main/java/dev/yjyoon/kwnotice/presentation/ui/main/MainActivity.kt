@@ -26,9 +26,9 @@ class MainActivity : ComponentActivity() {
         val systemUiController: SystemUiController = rememberSystemUiController()
         systemUiController.setStatusBarColor(
             if (isSystemInDarkTheme()) {
-                KWNoticeDarkColors.surface
+                KWNoticeDarkColors.background
             } else {
-                KWNoticeLightColors.surface
+                KWNoticeLightColors.background
             }
         )
 
