@@ -1,18 +1,24 @@
 package dev.yjyoon.kwnotice.presentation.ui.notice
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import dev.yjyoon.kwnotice.presentation.R
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTopAppBar
 
 @Composable
 fun NoticeScreen() {
-    Box(
-        Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    Column(
+        Modifier.fillMaxSize()
     ) {
-        Text("공지사항")
+        KwNoticeTopAppBar(
+            titleText = stringResource(id = R.string.navigation_notice),
+            actionIcon = Icons.Outlined.Search,
+            onActionClick = {}
+        )
     }
 }

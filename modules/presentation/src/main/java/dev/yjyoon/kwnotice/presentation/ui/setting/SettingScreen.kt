@@ -1,18 +1,24 @@
 package dev.yjyoon.kwnotice.presentation.ui.setting
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import dev.yjyoon.kwnotice.presentation.R
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTopAppBar
 
 @Composable
 fun SettingScreen() {
-    Box(
-        Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    Column(
+        Modifier.fillMaxSize()
     ) {
-        Text("알림설정")
+        KwNoticeTopAppBar(
+            titleText = stringResource(id = R.string.navigation_settings),
+            actionIcon = Icons.Outlined.Info,
+            onActionClick = {}
+        )
     }
 }
