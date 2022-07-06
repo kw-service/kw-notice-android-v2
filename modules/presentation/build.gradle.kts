@@ -28,6 +28,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
+        freeCompilerArgs += listOf(
+            "-Xopt-in=kotlin.RequiresOptIn",
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
+        )
         jvmTarget = "1.8"
     }
 }
