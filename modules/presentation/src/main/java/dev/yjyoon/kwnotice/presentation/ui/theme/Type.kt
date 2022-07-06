@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.sp
 
 val Roboto = FontFamily.Default
 
-val KWNoticeTypography = Typography(
+val KwNoticeTypography = Typography(
     labelLarge = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Medium,
@@ -95,7 +95,7 @@ val KWNoticeTypography = Typography(
     ),
     titleLarge = TextStyle(
         fontFamily = Roboto,
-        fontWeight = FontWeight.W400,
+        fontWeight = FontWeight.Bold,
         letterSpacing = 0.sp,
         lineHeight = 28.sp,
         fontSize = 22.sp
