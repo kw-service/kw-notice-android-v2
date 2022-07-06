@@ -51,6 +51,7 @@ google-firebase-messaging = { module = "com.google.firebase:firebase-messaging" 
 google-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 
 google-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+google-accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 google-accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
 
 # Room
