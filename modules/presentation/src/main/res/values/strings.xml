@@ -1,0 +1,5 @@
+<resources>
+    <string name="navigation_notice">공지사항</string>
+    <string name="navigation_favorite">즐겨찾기</string>
+    <string name="navigation_settings">알림설정</string>
+</resources>
