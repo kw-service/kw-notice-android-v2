@@ -10,4 +10,6 @@ interface SettingsRepository {
     suspend fun subscribeFcmTopic(topic: FcmTopic): Result<Unit>
 
     suspend fun unsubscribeFcmTopic(topic: FcmTopic): Result<Unit>
+
+    suspend fun checkFirstLaunch(): Result<Boolean>
 }
