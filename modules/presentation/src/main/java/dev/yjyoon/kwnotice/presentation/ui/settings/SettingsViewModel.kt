@@ -28,15 +28,17 @@ class SettingsViewModel @Inject constructor(
 
     fun subscribeTo(topic: FcmTopic) {
         launch {
+            subscribeFcmTopicUseCase(topic)
             fcmSubscription.subscribeTo(topic)
-                .onSuccess { subscribeFcmTopicUseCase(topic) }
+                .onFailure { unsubscribeFcmTopicUseCase(topic) }
         }
     }
 
     fun unsubscribeFrom(topic: FcmTopic) {
         launch {
+            unsubscribeFcmTopicUseCase(topic)
             fcmSubscription.unsubscribeFrom(topic)
-                .onSuccess { unsubscribeFcmTopicUseCase(topic) }
+                .onFailure { subscribeFcmTopicUseCase(topic) }
         }
     }
 }
