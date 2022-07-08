@@ -16,6 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
@@ -49,7 +50,7 @@ fun MainScreen() {
         ) {
             composable(MainDestination.Notice.route) { NoticeScreen() }
             composable(MainDestination.Favorite.route) { FavoriteScreen() }
-            composable(MainDestination.Settings.route) { SettingsScreen() }
+            composable(MainDestination.Settings.route) { SettingsScreen(viewModel = hiltViewModel()) }
         }
     }
 }
