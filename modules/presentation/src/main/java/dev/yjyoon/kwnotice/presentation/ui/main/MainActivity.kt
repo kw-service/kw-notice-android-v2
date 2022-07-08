@@ -12,7 +12,10 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setScreen { MainScreen() }
+        setScreen {
+            MainScreen(
+            )
+        }
     }
 
     companion object {

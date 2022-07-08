@@ -11,30 +11,64 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yjyoon.kwnotice.domain.model.FcmTopic
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeDivider
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeLoading
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeSwitchBar
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTopAppBar
+import dev.yjyoon.kwnotice.presentation.ui.model.FcmTopicModel
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTypography
 
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(viewModel: SettingsViewModel) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    SettingsScreen(
+        uiState = uiState,
+        onSubscribe = viewModel::subscribeTo,
+        onUnsubscribe = viewModel::unsubscribeFrom
+    )
+}
+
+@Composable
+fun SettingsScreen(
+    uiState: SettingsUiState,
+    onSubscribe: (FcmTopic) -> Unit,
+    onUnsubscribe: (FcmTopic) -> Unit
+) {
+    when (uiState) {
+        is SettingsUiState.Success -> {
+            SettingsContent(
+                uiState = uiState,
+                onSubscribe = onSubscribe,
+                onUnsubscribe = onUnsubscribe
+            )
+        }
+        SettingsUiState.Loading -> {
+            KwNoticeLoading()
+        }
+        SettingsUiState.Failure -> {}
+    }
+}
+
+@Composable
+fun SettingsContent(
+    uiState: SettingsUiState.Success,
+    onSubscribe: (FcmTopic) -> Unit,
+    onUnsubscribe: (FcmTopic) -> Unit
+) {
     Column(
         Modifier.fillMaxSize()
     ) {
-        var checked1 by remember { mutableStateOf(true) }
-        var checked2 by remember { mutableStateOf(true) }
-        var checked3 by remember { mutableStateOf(true) }
         KwNoticeTopAppBar(
             titleText = stringResource(id = R.string.navigation_settings),
             actionIcon = Icons.Outlined.Info,
@@ -45,17 +79,17 @@ fun SettingsScreen() {
             text = stringResource(id = R.string.kw_home)
         )
         Spacer(Modifier.height(4.dp))
-        KwNoticeSwitchBar(
-            title = stringResource(id = R.string.settings_notification_new),
-            checked = checked1,
-            onTap = { checked1 = it },
-            Modifier.fillMaxWidth()
+        FcmTopicSwitchBar(
+            uiState = uiState,
+            fcmTopicModel = FcmTopicModel(FcmTopic.KwHomeNew),
+            onSubscribe = onSubscribe,
+            onUnsubscribe = onUnsubscribe
         )
-        KwNoticeSwitchBar(
-            title = stringResource(id = R.string.settings_notification_edit),
-            checked = checked2,
-            onTap = { checked2 = it },
-            Modifier.fillMaxWidth()
+        FcmTopicSwitchBar(
+            uiState = uiState,
+            fcmTopicModel = FcmTopicModel(FcmTopic.KwHomeEdit),
+            onSubscribe = onSubscribe,
+            onUnsubscribe = onUnsubscribe
         )
         KwNoticeDivider()
         SettingsTitle(
@@ -63,13 +97,34 @@ fun SettingsScreen() {
             text = stringResource(id = R.string.sw_central)
         )
         Spacer(Modifier.height(4.dp))
-        KwNoticeSwitchBar(
-            title = stringResource(id = R.string.settings_notification_new),
-            checked = checked3,
-            onTap = { checked3 = it },
-            Modifier.fillMaxWidth()
+        FcmTopicSwitchBar(
+            uiState = uiState,
+            fcmTopicModel = FcmTopicModel(FcmTopic.SwCentralNew),
+            onSubscribe = onSubscribe,
+            onUnsubscribe = onUnsubscribe
         )
     }
+}
+
+@Composable
+fun FcmTopicSwitchBar(
+    uiState: SettingsUiState.Success,
+    fcmTopicModel: FcmTopicModel,
+    onSubscribe: (FcmTopic) -> Unit,
+    onUnsubscribe: (FcmTopic) -> Unit
+) {
+    KwNoticeSwitchBar(
+        title = stringResource(id = fcmTopicModel.settingsLabelResId),
+        checked = uiState.subscription[fcmTopicModel.topic]!!,
+        onTap = {
+            if (it) {
+                onSubscribe(fcmTopicModel.topic)
+            } else {
+                onUnsubscribe(fcmTopicModel.topic)
+            }
+        },
+        Modifier.fillMaxWidth()
+    )
 }
 
 @Composable
@@ -87,10 +142,20 @@ fun SettingsTitle(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun SettingsScreenPreview() {
     KwNoticeTheme {
-        SettingsScreen()
+        SettingsScreen(
+            uiState = SettingsUiState.Success(
+                mapOf(
+                    FcmTopic.KwHomeNew to true,
+                    FcmTopic.KwHomeEdit to false,
+                    FcmTopic.SwCentralNew to true
+                )
+            ),
+            onSubscribe = {},
+            onUnsubscribe = {}
+        )
     }
 }
