@@ -17,7 +17,7 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setScreen { SplashScreen(viewModel = viewModel) }
+        setScreen { SplashScreen() }
 
         lifecycleScope.launch {
             delay(SPLASH_TIME_MILLIS)

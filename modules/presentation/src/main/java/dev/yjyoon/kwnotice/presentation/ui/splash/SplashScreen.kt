@@ -16,12 +16,6 @@ import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 
 @Composable
-fun SplashScreen(viewModel: SplashViewModel) {
-
-    SplashScreen()
-}
-
-@Composable
 fun SplashScreen() {
     Box(
         Modifier
