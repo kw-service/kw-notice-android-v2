@@ -55,7 +55,13 @@ class NoticeViewModel @Inject constructor(
     }
 
     fun refresh() {
-        _uiState.value = NoticeUiState.Loading
-        fetch()
+        if (isLoading().not()) {
+            _uiState.value = NoticeUiState.Loading
+            fetch()
+        }
     }
+
+    fun isLoading() =
+        _uiState.value.kwHomeNoticeUiState == KwHomeNoticeUiState.Loading
+                || _uiState.value.swCentralNoticeUiState == SwCentralNoticeUiState.Loading
 }

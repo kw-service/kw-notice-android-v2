@@ -1,9 +1,17 @@
 package dev.yjyoon.kwnotice.presentation.ui.notice
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -11,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -31,50 +41,81 @@ fun NoticeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    NoticeScreen(uiState = uiState)
+    NoticeScreen(
+        uiState = uiState,
+        onRefresh = viewModel::refresh,
+        isLoading = viewModel::isLoading
+    )
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun NoticeScreen(uiState: NoticeUiState) {
+fun NoticeScreen(
+    uiState: NoticeUiState,
+    onRefresh: () -> Unit,
+    isLoading: () -> Boolean
+) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
+    Box(
         Modifier.fillMaxSize()
     ) {
-        KwNoticeTopAppBar(
-            titleText = stringResource(id = R.string.navigation_notice),
-            actionIcon = Icons.Outlined.Search,
-            onActionClick = {}
-        )
-        TabRow(
-            selectedTabIndex = pagerState.currentPage,
-        ) {
-            NoticeTab.values().forEachIndexed { index, tab ->
-                Tab(
-                    text = { Text(stringResource(id = tab.textRes)) },
-                    selected = pagerState.currentPage == index,
-                    onClick = {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(page = index)
-                        }
-                    },
-                )
+        Column {
+            KwNoticeTopAppBar(
+                titleText = stringResource(id = R.string.navigation_notice),
+                actionIcon = Icons.Outlined.Search,
+                onActionClick = {}
+            )
+            TabRow(
+                selectedTabIndex = pagerState.currentPage,
+            ) {
+                NoticeTab.values().forEachIndexed { index, tab ->
+                    Tab(
+                        text = { Text(stringResource(id = tab.textRes)) },
+                        selected = pagerState.currentPage == index,
+                        onClick = {
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(page = index)
+                            }
+                        },
+                    )
+                }
+            }
+            HorizontalPager(
+                count = NoticeTab.values().size,
+                state = pagerState,
+                modifier = Modifier.fillMaxSize()
+            ) { tab ->
+                when (tab) {
+                    NoticeTab.KwHome.ordinal -> {
+                        KwHomeContent(uiState = uiState.kwHomeNoticeUiState)
+                    }
+                    NoticeTab.SwCentral.ordinal -> {
+                        SwCentralContent(uiState = uiState.swCentralNoticeUiState)
+                    }
+                }
             }
         }
-        HorizontalPager(
-            count = NoticeTab.values().size,
-            state = pagerState,
-            modifier = Modifier.fillMaxSize()
-        ) { tab ->
-            when (tab) {
-                NoticeTab.KwHome.ordinal -> {
-                    KwHomeContent(uiState = uiState.kwHomeNoticeUiState)
-                }
-                NoticeTab.SwCentral.ordinal -> {
-                    SwCentralContent(uiState = uiState.swCentralNoticeUiState)
-                }
+        FloatingActionButton(
+            onClick = onRefresh,
+            containerColor = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(20.dp)
+        ) {
+            if (isLoading()) {
+                CircularProgressIndicator(
+                    Modifier.size(16.dp),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    strokeWidth = 2.dp
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
     }
@@ -100,7 +141,9 @@ private fun NoticeScreenPreview() {
                     }
                 ),
                 swCentralNoticeUiState = SwCentralNoticeUiState.Failure
-            )
+            ),
+            onRefresh = {},
+            isLoading = { false }
         )
     }
 }
