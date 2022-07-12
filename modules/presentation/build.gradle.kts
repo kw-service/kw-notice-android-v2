@@ -24,6 +24,8 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -51,4 +53,6 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    coreLibraryDesugaring(libs.android.desugar)
 }

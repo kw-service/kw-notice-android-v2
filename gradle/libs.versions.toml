@@ -23,6 +23,7 @@ okhttp = "4.9.3"
 retrofit = "2.9.0"
 gson = "2.9.0"
 
+desugar = "1.1.5"
 junit = "4.13.2"
 
 [libraries]
@@ -32,6 +33,7 @@ coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-androi
 
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android.gradle" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+android-desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
@@ -76,6 +78,7 @@ hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }
 hilt-gradle = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
+
 
 javax-inject = "javax.inject:javax.inject:1"
 
