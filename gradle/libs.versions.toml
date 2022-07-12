@@ -55,6 +55,7 @@ google-firebase-analytics = { module = "com.google.firebase:firebase-analytics-k
 google-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 google-accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 google-accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
+google-accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 
 # Room
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }

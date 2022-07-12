@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.google.accompanist.webview)
     implementation(libs.google.accompanist.systemuicontroller)
     implementation(libs.google.accompanist.navigation.animation)
+    implementation(libs.google.accompanist.pager)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
