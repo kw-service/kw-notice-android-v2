@@ -6,18 +6,16 @@ sealed class Notice {
     abstract val id: Long
     abstract val title: String
     abstract val url: String
-    abstract val postedAt: LocalDate
-    abstract val crawledAt: LocalDate
+    abstract val postedDate: LocalDate
 
     data class KwHome(
         override val id: Long,
         override val title: String,
         override val url: String,
-        override val postedAt: LocalDate,
-        override val crawledAt: LocalDate,
+        override val postedDate: LocalDate,
         val tag: String,
         val department: String,
-        val modifiedAt: LocalDate
+        val modifiedDate: LocalDate
 
     ) : Notice()
 
@@ -25,7 +23,6 @@ sealed class Notice {
         override val id: Long,
         override val title: String,
         override val url: String,
-        override val postedAt: LocalDate,
-        override val crawledAt: LocalDate,
+        override val postedDate: LocalDate,
     ) : Notice()
 }
