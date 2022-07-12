@@ -6,6 +6,9 @@
     <string name="navigation_favorite">즐겨찾기</string>
     <string name="navigation_settings">환경설정</string>
 
+    <string name="notice_date_format">M월 d일</string>
+    <string name="notice_network_fail">공지사항을 불러올 수 없습니다.\n네트워크 연결 상태를 확인해주세요!</string>
+
     <string name="settings_notification_new">새로운 공지사항 등록 알림</string>
     <string name="settings_notification_edit">기존 공지사항 수정 알림</string>
 </resources>

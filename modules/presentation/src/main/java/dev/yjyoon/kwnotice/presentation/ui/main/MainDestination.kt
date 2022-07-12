@@ -18,8 +18,8 @@ enum class MainDestination(
     ),
     Favorite(
         route = ROUTE_FAVORITE,
-        iconOutlinedResId = R.drawable.ic_star_outlined,
-        iconFilledResId = R.drawable.ic_star_filled,
+        iconOutlinedResId = R.drawable.ic_fav_outlined,
+        iconFilledResId = R.drawable.ic_fav_filled,
         labelResId = R.string.navigation_favorite
     ),
     Settings(

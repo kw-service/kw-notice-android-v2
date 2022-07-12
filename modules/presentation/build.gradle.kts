@@ -24,6 +24,8 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -48,7 +50,10 @@ dependencies {
     implementation(libs.google.accompanist.webview)
     implementation(libs.google.accompanist.systemuicontroller)
     implementation(libs.google.accompanist.navigation.animation)
+    implementation(libs.google.accompanist.pager)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    coreLibraryDesugaring(libs.android.desugar)
 }
