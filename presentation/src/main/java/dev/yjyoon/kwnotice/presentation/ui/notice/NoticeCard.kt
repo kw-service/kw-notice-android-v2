@@ -139,8 +139,7 @@ private fun KwHomeNoticePreview() {
         department = "교육지원팀",
         url = "",
         postedDate = LocalDate.now(),
-        modifiedDate = LocalDate.now(),
-        crawledAt = LocalDate.now()
+        modifiedDate = LocalDate.now()
     )
     KwNoticeTheme {
         NoticeCard(notice = notice, bookmarked = true, onToggleBookmark = { _, _ -> })
@@ -154,8 +153,7 @@ private fun SwCentralNoticePreview() {
         id = 1,
         title = "2022 SW중심대학 공동 해커톤 참가 신청 안내",
         url = "",
-        postedDate = LocalDate.now(),
-        crawledAt = LocalDate.now()
+        postedDate = LocalDate.now()
     )
     KwNoticeTheme(useDarkTheme = true) {
         NoticeCard(notice = notice, bookmarked = false, onToggleBookmark = { _, _ -> })

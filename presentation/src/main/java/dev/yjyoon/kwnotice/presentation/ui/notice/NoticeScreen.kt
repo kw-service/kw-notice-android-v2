@@ -95,8 +95,7 @@ private fun NoticeScreenPreview() {
                             department = "교육지원팀",
                             url = "",
                             postedDate = LocalDate.now(),
-                            modifiedDate = LocalDate.now(),
-                            crawledAt = LocalDate.now()
+                            modifiedDate = LocalDate.now()
                         )
                     }
                 ),
