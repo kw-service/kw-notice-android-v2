@@ -36,14 +36,17 @@ fun NoticeCard(
     bookmarked: Boolean,
     onToggleBookmark: (Notice, Boolean) -> Unit
 ) {
-    ElevatedCard(onClick = { }, modifier = Modifier.height(IntrinsicSize.Min)) {
+    ElevatedCard(
+        onClick = { },
+        modifier = Modifier.height(IntrinsicSize.Min)
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            KwNoticeRoundRect(width = 8.dp, radius = 0.dp)
+            KwNoticeRoundRect(width = 4.dp, radius = 0.dp)
             Column(
                 Modifier
-                    .padding(start = 12.dp, top = 12.dp, end = 8.dp, bottom = 8.dp)
+                    .padding(start = 12.dp, top = 12.dp, end = 8.dp, bottom = 10.dp)
                     .weight(1f),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {

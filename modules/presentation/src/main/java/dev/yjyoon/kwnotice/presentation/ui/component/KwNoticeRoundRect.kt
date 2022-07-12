@@ -20,7 +20,7 @@ fun KwNoticeRoundRect(
     radius: Dp,
     width: Dp = Dp.Unspecified,
     height: Dp = Dp.Unspecified,
-    color: Color = MaterialTheme.colorScheme.onSurfaceVariant
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
     Canvas(
         modifier = modifier.then(
