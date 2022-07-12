@@ -94,9 +94,8 @@ private fun NoticeScreenPreview() {
                             tag = "학사",
                             department = "교육지원팀",
                             url = "",
-                            postedAt = LocalDate.now(),
-                            modifiedAt = LocalDate.now(),
-                            crawledAt = LocalDate.now()
+                            postedDate = LocalDate.now(),
+                            modifiedDate = LocalDate.now()
                         )
                     }
                 ),

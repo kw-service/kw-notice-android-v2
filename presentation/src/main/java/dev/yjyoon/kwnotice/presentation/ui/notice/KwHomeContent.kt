@@ -29,8 +29,8 @@ fun KwHomeContent(
 @Composable
 fun KwHomeNoticeColumn(notices: List<Notice.KwHome>) {
     LazyColumn(
-        contentPadding = PaddingValues(24.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+        contentPadding = PaddingValues(18.dp),
+        verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
         items(notices) {
             NoticeCard(notice = it, bookmarked = false, onToggleBookmark = { _, _ -> })

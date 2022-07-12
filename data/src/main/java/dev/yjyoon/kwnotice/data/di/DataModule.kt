@@ -10,6 +10,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dev.yjyoon.kwnotice.data.remote.api.NoticeService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
@@ -22,7 +23,7 @@ internal object DataModule {
     @Provides
     @Singleton
     @Named("BaseUrl")
-    fun provideBaseUrl(): String = "https://n6f11u33jf.execute-api.ap-northeast-2.amazonaws.com/v1"
+    fun provideBaseUrl(): String = "https://n6f11u33jf.execute-api.ap-northeast-2.amazonaws.com/v1/"
 
     @Provides
     @Singleton
@@ -33,9 +34,14 @@ internal object DataModule {
     @Singleton
     fun provideRetrofit(@Named("BaseUrl") baseUrl: String): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
+    
+    @Provides
+    @Singleton
+    fun provideNoticeService(retrofit: Retrofit): NoticeService =
+        retrofit.create(NoticeService::class.java)
 
     @Provides
     @Singleton

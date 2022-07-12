@@ -106,10 +106,10 @@ fun NoticeTitle(notice: Notice) {
 fun NoticeDateBadge(notice: Notice) {
     val date = when (notice) {
         is Notice.KwHome -> {
-            notice.modifiedAt
+            notice.modifiedDate
         }
         is Notice.SwCentral -> {
-            notice.postedAt
+            notice.postedDate
         }
     }
 
@@ -138,9 +138,8 @@ private fun KwHomeNoticePreview() {
         tag = "학사",
         department = "교육지원팀",
         url = "",
-        postedAt = LocalDate.now(),
-        modifiedAt = LocalDate.now(),
-        crawledAt = LocalDate.now()
+        postedDate = LocalDate.now(),
+        modifiedDate = LocalDate.now()
     )
     KwNoticeTheme {
         NoticeCard(notice = notice, bookmarked = true, onToggleBookmark = { _, _ -> })
@@ -154,8 +153,7 @@ private fun SwCentralNoticePreview() {
         id = 1,
         title = "2022 SW중심대학 공동 해커톤 참가 신청 안내",
         url = "",
-        postedAt = LocalDate.now(),
-        crawledAt = LocalDate.now()
+        postedDate = LocalDate.now()
     )
     KwNoticeTheme(useDarkTheme = true) {
         NoticeCard(notice = notice, bookmarked = false, onToggleBookmark = { _, _ -> })
