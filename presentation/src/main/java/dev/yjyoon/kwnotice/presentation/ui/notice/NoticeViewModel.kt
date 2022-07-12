@@ -1,5 +1,6 @@
 package dev.yjyoon.kwnotice.presentation.ui.notice
 
+import android.util.Log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yjyoon.kwnotice.domain.usecase.GetKwHomeNoticeListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.GetSwCentralNoticeListUseCase
@@ -31,10 +32,11 @@ class NoticeViewModel @Inject constructor(
                         it.copy(kwHomeNoticeUiState = KwHomeNoticeUiState.Success(notices))
                     }
                 }
-                .onFailure {
+                .onFailure { throwable ->
                     _uiState.update {
                         it.copy(kwHomeNoticeUiState = KwHomeNoticeUiState.Failure)
                     }
+                    Log.e(null, throwable.stackTraceToString())
                 }
 
             getSwCentralNoticeListUseCase()
@@ -43,10 +45,11 @@ class NoticeViewModel @Inject constructor(
                         it.copy(swCentralNoticeUiState = SwCentralNoticeUiState.Success(notices))
                     }
                 }
-                .onFailure {
+                .onFailure { throwable ->
                     _uiState.update {
                         it.copy(swCentralNoticeUiState = SwCentralNoticeUiState.Failure)
                     }
+                    Log.e(null, throwable.stackTraceToString())
                 }
         }
     }
