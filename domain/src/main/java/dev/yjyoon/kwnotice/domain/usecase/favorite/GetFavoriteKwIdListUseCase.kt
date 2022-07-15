@@ -1,12 +1,12 @@
-package dev.yjyoon.kwnotice.domain.usecase
+package dev.yjyoon.kwnotice.domain.usecase.favorite
 
 import dev.yjyoon.kwnotice.domain.repository.FavoriteRepository
 import javax.inject.Inject
 
-class GetFavoriteSwIdListUseCase @Inject constructor(
+class GetFavoriteKwIdListUseCase @Inject constructor(
     private val favoriteRepository: FavoriteRepository
 ) {
 
     suspend operator fun invoke(): Result<List<Long>> =
-        favoriteRepository.getFavoriteSwCentralIds()
+        favoriteRepository.getFavoriteKwHomeIds()
 }

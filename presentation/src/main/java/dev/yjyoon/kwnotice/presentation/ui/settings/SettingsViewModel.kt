@@ -3,9 +3,9 @@ package dev.yjyoon.kwnotice.presentation.ui.settings
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yjyoon.kwnotice.domain.model.FcmTopic
-import dev.yjyoon.kwnotice.domain.usecase.GetFcmSubscriptionUseCase
-import dev.yjyoon.kwnotice.domain.usecase.SubscribeFcmTopicUseCase
-import dev.yjyoon.kwnotice.domain.usecase.UnsubscribeFcmTopicUseCase
+import dev.yjyoon.kwnotice.domain.usecase.settings.GetFcmSubscriptionUseCase
+import dev.yjyoon.kwnotice.domain.usecase.settings.SubscribeFcmTopicUseCase
+import dev.yjyoon.kwnotice.domain.usecase.settings.UnsubscribeFcmTopicUseCase
 import dev.yjyoon.kwnotice.presentation.fcm.FcmSubscription
 import dev.yjyoon.kwnotice.presentation.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.SharingStarted

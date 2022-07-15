@@ -1,4 +1,4 @@
-package dev.yjyoon.kwnotice.domain.usecase
+package dev.yjyoon.kwnotice.domain.usecase.settings
 
 import dev.yjyoon.kwnotice.domain.model.FcmTopic
 import dev.yjyoon.kwnotice.domain.repository.SettingsRepository

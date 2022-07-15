@@ -1,4 +1,4 @@
-package dev.yjyoon.kwnotice.domain.usecase
+package dev.yjyoon.kwnotice.domain.usecase.notice
 
 import dev.yjyoon.kwnotice.domain.model.Notice
 import dev.yjyoon.kwnotice.domain.repository.NoticeRepository
