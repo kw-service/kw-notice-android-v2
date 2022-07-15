@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yjyoon.kwnotice.presentation.ui.base.BaseActivity
+import dev.yjyoon.kwnotice.presentation.ui.webview.WebViewActivity
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -14,8 +15,14 @@ class MainActivity : BaseActivity() {
 
         setScreen {
             MainScreen(
+                onClickNotice = ::startWebViewActivity
             )
         }
+    }
+
+    private fun startWebViewActivity(url: String) {
+        val intent = WebViewActivity.getIntent(this, url)
+        startActivity(intent)
     }
 
     companion object {

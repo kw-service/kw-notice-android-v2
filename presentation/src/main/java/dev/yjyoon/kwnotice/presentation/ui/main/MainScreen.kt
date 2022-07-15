@@ -28,7 +28,9 @@ import dev.yjyoon.kwnotice.presentation.ui.settings.SettingsScreen
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    onClickNotice: (String) -> Unit
+) {
     val navController = rememberAnimatedNavController()
     val navigation = rememberMainNavigation(navController)
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -47,7 +49,7 @@ fun MainScreen() {
             startDestination = MainDestination.Notice.route,
             Modifier.padding(innerPadding)
         ) {
-            composable(MainDestination.Notice.route) { NoticeScreen() }
+            composable(MainDestination.Notice.route) { NoticeScreen(onClickNotice = onClickNotice) }
             composable(MainDestination.Favorite.route) { FavoriteScreen() }
             composable(MainDestination.Settings.route) { SettingsScreen(viewModel = hiltViewModel()) }
         }

@@ -12,6 +12,7 @@ import dev.yjyoon.kwnotice.domain.model.Notice
 @Composable
 fun KwHomeContent(
     uiState: KwHomeNoticeUiState,
+    onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit
 ) {
@@ -19,6 +20,7 @@ fun KwHomeContent(
         is KwHomeNoticeUiState.Success -> {
             KwHomeNoticeColumn(
                 uiState = uiState,
+                onClickNotice = onClickNotice,
                 onAddToFavorite = onAddToFavorite,
                 onDeleteFromFavorite = onDeleteFromFavorite
             )
@@ -35,6 +37,7 @@ fun KwHomeContent(
 @Composable
 fun KwHomeNoticeColumn(
     uiState: KwHomeNoticeUiState.Success,
+    onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit
 ) {
@@ -45,6 +48,7 @@ fun KwHomeNoticeColumn(
         items(uiState.notices) {
             NoticeCard(
                 notice = it,
+                onClickNotice = onClickNotice,
                 bookmarked = uiState.favoriteIds.contains(it.id),
                 onToggleBookmark = { notice, bookmarked ->
                     if (bookmarked) {

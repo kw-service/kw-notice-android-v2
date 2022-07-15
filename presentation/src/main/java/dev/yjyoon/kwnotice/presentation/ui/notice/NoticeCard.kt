@@ -28,23 +28,20 @@ import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeBadge
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeRoundRect
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
-import dev.yjyoon.kwnotice.presentation.ui.webview.WebViewActivity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Composable
 fun NoticeCard(
     notice: Notice,
+    onClickNotice: (String) -> Unit,
     bookmarked: Boolean,
     onToggleBookmark: (Notice, Boolean) -> Unit
 ) {
     val context = LocalContext.current
 
     ElevatedCard(
-        onClick = {
-            val intent = WebViewActivity.getIntent(context, notice.url)
-            context.startActivity(intent)
-        },
+        onClick = { onClickNotice(notice.url) },
         modifier = Modifier.height(IntrinsicSize.Min)
     ) {
         Row(
@@ -149,7 +146,11 @@ private fun KwHomeNoticePreview() {
         modifiedDate = LocalDate.now()
     )
     KwNoticeTheme {
-        NoticeCard(notice = notice, bookmarked = true, onToggleBookmark = { _, _ -> })
+        NoticeCard(
+            notice = notice,
+            onClickNotice = {},
+            bookmarked = true,
+            onToggleBookmark = { _, _ -> })
     }
 }
 
@@ -163,6 +164,10 @@ private fun SwCentralNoticePreview() {
         postedDate = LocalDate.now()
     )
     KwNoticeTheme(useDarkTheme = true) {
-        NoticeCard(notice = notice, bookmarked = false, onToggleBookmark = { _, _ -> })
+        NoticeCard(
+            notice = notice,
+            onClickNotice = {},
+            bookmarked = false,
+            onToggleBookmark = { _, _ -> })
     }
 }

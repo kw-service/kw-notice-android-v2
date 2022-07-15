@@ -37,7 +37,8 @@ import java.time.LocalDate
 
 @Composable
 fun NoticeScreen(
-    viewModel: NoticeViewModel = hiltViewModel()
+    viewModel: NoticeViewModel = hiltViewModel(),
+    onClickNotice: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -45,6 +46,7 @@ fun NoticeScreen(
         uiState = uiState,
         onRefresh = viewModel::refresh,
         isLoading = viewModel::isLoading,
+        onClickNotice = onClickNotice,
         onAddToFavorite = viewModel::addFavorite,
         onDeleteFromFavorite = viewModel::deleteFavorite
     )
@@ -56,6 +58,7 @@ fun NoticeScreen(
     uiState: NoticeUiState,
     onRefresh: () -> Unit,
     isLoading: () -> Boolean,
+    onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit
 ) {
@@ -95,6 +98,7 @@ fun NoticeScreen(
                     NoticeTab.KwHome.ordinal -> {
                         KwHomeContent(
                             uiState = uiState.kwHomeNoticeUiState,
+                            onClickNotice = onClickNotice,
                             onAddToFavorite = onAddToFavorite,
                             onDeleteFromFavorite = onDeleteFromFavorite
                         )
@@ -102,6 +106,7 @@ fun NoticeScreen(
                     NoticeTab.SwCentral.ordinal -> {
                         SwCentralContent(
                             uiState = uiState.swCentralNoticeUiState,
+                            onClickNotice = onClickNotice,
                             onAddToFavorite = onAddToFavorite,
                             onDeleteFromFavorite = onDeleteFromFavorite
                         )
@@ -158,6 +163,7 @@ private fun NoticeScreenPreview() {
             ),
             onRefresh = {},
             isLoading = { false },
+            onClickNotice = {},
             onAddToFavorite = {},
             onDeleteFromFavorite = {}
         )
