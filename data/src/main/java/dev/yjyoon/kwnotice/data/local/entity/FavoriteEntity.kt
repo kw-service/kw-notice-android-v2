@@ -28,3 +28,14 @@ fun Favorite.toData() = FavoriteEntity(
     date = date,
     url = url
 )
+
+fun FavoriteEntity.toDomain() = Favorite(
+    id = id,
+    title = title,
+    type = when (type) {
+        FavoriteEntity.Type.KwHome -> Favorite.Type.KwHome
+        FavoriteEntity.Type.SwCentral -> Favorite.Type.SwCentral
+    },
+    date = date,
+    url = url
+)

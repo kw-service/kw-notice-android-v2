@@ -7,11 +7,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import dev.yjyoon.kwnotice.domain.model.Favorite
 import dev.yjyoon.kwnotice.domain.model.Notice
+import dev.yjyoon.kwnotice.domain.model.toFavorite
 
 @Composable
 fun KwHomeContent(
     uiState: KwHomeNoticeUiState,
+    favoriteNotices: List<Favorite>,
     onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit
@@ -22,7 +25,8 @@ fun KwHomeContent(
                 uiState = uiState,
                 onClickNotice = onClickNotice,
                 onAddToFavorite = onAddToFavorite,
-                onDeleteFromFavorite = onDeleteFromFavorite
+                onDeleteFromFavorite = onDeleteFromFavorite,
+                favoriteNotices = favoriteNotices
             )
         }
         KwHomeNoticeUiState.Loading -> {
@@ -37,6 +41,7 @@ fun KwHomeContent(
 @Composable
 fun KwHomeNoticeColumn(
     uiState: KwHomeNoticeUiState.Success,
+    favoriteNotices: List<Favorite>,
     onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit
@@ -49,7 +54,7 @@ fun KwHomeNoticeColumn(
             NoticeCard(
                 notice = it,
                 onClickNotice = onClickNotice,
-                bookmarked = uiState.favoriteIds.contains(it.id),
+                bookmarked = favoriteNotices.contains(it.toFavorite()),
                 onToggleBookmark = { notice, bookmarked ->
                     if (bookmarked) {
                         onAddToFavorite(notice)

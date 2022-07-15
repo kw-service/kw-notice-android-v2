@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import dev.yjyoon.kwnotice.data.local.entity.FavoriteEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {
@@ -19,4 +20,7 @@ interface FavoriteDao {
 
     @Query("SELECT id FROM favorite WHERE type = 'SwCentral'")
     suspend fun getSwCentralIds(): List<Long>
+
+    @Query("SELECT * FROM favorite")
+    fun getAll(): Flow<List<FavoriteEntity>>
 }

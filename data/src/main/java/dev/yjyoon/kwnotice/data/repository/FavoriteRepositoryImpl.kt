@@ -2,8 +2,11 @@ package dev.yjyoon.kwnotice.data.repository
 
 import dev.yjyoon.kwnotice.data.local.dao.FavoriteDao
 import dev.yjyoon.kwnotice.data.local.entity.toData
+import dev.yjyoon.kwnotice.data.local.entity.toDomain
 import dev.yjyoon.kwnotice.domain.model.Favorite
 import dev.yjyoon.kwnotice.domain.repository.FavoriteRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 internal class FavoriteRepositoryImpl @Inject constructor(
@@ -25,4 +28,7 @@ internal class FavoriteRepositoryImpl @Inject constructor(
     override suspend fun getFavoriteSwCentralIds(): Result<List<Long>> = runCatching {
         favoriteDao.getSwCentralIds()
     }
+
+    override fun getAllFavoritesStream(): Flow<List<Favorite>> =
+        favoriteDao.getAll().map { favorites -> favorites.map { it.toDomain() } }
 }

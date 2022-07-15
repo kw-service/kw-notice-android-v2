@@ -3,15 +3,8 @@ package dev.yjyoon.kwnotice.presentation.ui.notice
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -19,15 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import dev.yjyoon.kwnotice.domain.model.Favorite
 import dev.yjyoon.kwnotice.domain.model.Notice
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTopAppBar
@@ -44,8 +36,7 @@ fun NoticeScreen(
 
     NoticeScreen(
         uiState = uiState,
-        onRefresh = viewModel::refresh,
-        isLoading = viewModel::isLoading,
+        favoriteNotices = uiState.favoriteNotices,
         onClickNotice = onClickNotice,
         onAddToFavorite = viewModel::addFavorite,
         onDeleteFromFavorite = viewModel::deleteFavorite
@@ -56,8 +47,7 @@ fun NoticeScreen(
 @Composable
 fun NoticeScreen(
     uiState: NoticeUiState,
-    onRefresh: () -> Unit,
-    isLoading: () -> Boolean,
+    favoriteNotices: List<Favorite>,
     onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit
@@ -100,7 +90,8 @@ fun NoticeScreen(
                             uiState = uiState.kwHomeNoticeUiState,
                             onClickNotice = onClickNotice,
                             onAddToFavorite = onAddToFavorite,
-                            onDeleteFromFavorite = onDeleteFromFavorite
+                            onDeleteFromFavorite = onDeleteFromFavorite,
+                            favoriteNotices = favoriteNotices
                         )
                     }
                     NoticeTab.SwCentral.ordinal -> {
@@ -108,31 +99,11 @@ fun NoticeScreen(
                             uiState = uiState.swCentralNoticeUiState,
                             onClickNotice = onClickNotice,
                             onAddToFavorite = onAddToFavorite,
-                            onDeleteFromFavorite = onDeleteFromFavorite
+                            onDeleteFromFavorite = onDeleteFromFavorite,
+                            favoriteNotices = favoriteNotices
                         )
                     }
                 }
-            }
-        }
-        FloatingActionButton(
-            onClick = onRefresh,
-            containerColor = MaterialTheme.colorScheme.primary,
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(20.dp)
-        ) {
-            if (isLoading()) {
-                CircularProgressIndicator(
-                    Modifier.size(16.dp),
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    strokeWidth = 2.dp
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.Default.Refresh,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
             }
         }
     }
@@ -145,7 +116,6 @@ private fun NoticeScreenPreview() {
         NoticeScreen(
             uiState = NoticeUiState(
                 kwHomeNoticeUiState = KwHomeNoticeUiState.Success(
-                    notices =
                     List(10) {
                         Notice.KwHome(
                             id = 0,
@@ -156,13 +126,12 @@ private fun NoticeScreenPreview() {
                             postedDate = LocalDate.now(),
                             modifiedDate = LocalDate.now()
                         )
-                    },
-                    favoriteIds = emptyList()
+                    }
                 ),
-                swCentralNoticeUiState = SwCentralNoticeUiState.Failure
+                swCentralNoticeUiState = SwCentralNoticeUiState.Failure,
+                favoriteNotices = emptyList()
             ),
-            onRefresh = {},
-            isLoading = { false },
+            favoriteNotices = emptyList(),
             onClickNotice = {},
             onAddToFavorite = {},
             onDeleteFromFavorite = {}

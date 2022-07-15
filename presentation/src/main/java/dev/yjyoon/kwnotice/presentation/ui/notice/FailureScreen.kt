@@ -25,12 +25,12 @@ fun FailureScreen() {
         Icon(
             painter = painterResource(id = R.drawable.ic_wifi_off),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(Modifier.height(12.dp))
         Text(
             text = stringResource(id = R.string.notice_network_fail),
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
     }
