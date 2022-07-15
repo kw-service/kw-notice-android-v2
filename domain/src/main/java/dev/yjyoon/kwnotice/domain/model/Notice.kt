@@ -26,3 +26,20 @@ sealed class Notice {
         override val postedDate: LocalDate,
     ) : Notice()
 }
+
+fun Notice.toFavorite() = when (this) {
+    is Notice.KwHome -> Favorite(
+        id = id,
+        title = title,
+        url = url,
+        date = modifiedDate,
+        type = Favorite.Type.KwHome
+    )
+    is Notice.SwCentral -> Favorite(
+        id = id,
+        title = title,
+        url = url,
+        date = postedDate,
+        type = Favorite.Type.SwCentral
+    )
+}
