@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,8 +37,6 @@ fun NoticeCard(
     bookmarked: Boolean,
     onToggleBookmark: (Notice, Boolean) -> Unit
 ) {
-    val context = LocalContext.current
-
     ElevatedCard(
         onClick = { onClickNotice(notice.url) },
         modifier = Modifier.height(IntrinsicSize.Min)

@@ -50,7 +50,7 @@ fun MainScreen(
             Modifier.padding(innerPadding)
         ) {
             composable(MainDestination.Notice.route) { NoticeScreen(onClickNotice = onClickNotice) }
-            composable(MainDestination.Favorite.route) { FavoriteScreen() }
+            composable(MainDestination.Favorite.route) { FavoriteScreen(onClickNotice = onClickNotice) }
             composable(MainDestination.Settings.route) { SettingsScreen(viewModel = hiltViewModel()) }
         }
     }
