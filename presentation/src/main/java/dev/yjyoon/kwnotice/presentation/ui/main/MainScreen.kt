@@ -3,7 +3,6 @@ package dev.yjyoon.kwnotice.presentation.ui.main
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -60,16 +59,10 @@ fun MainNavigationBar(
     currentDestination: NavDestination?,
     onNavigate: (MainDestination) -> Unit
 ) {
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.background,
-        tonalElevation = 0.dp
-    ) {
+    NavigationBar {
         MainDestination.values().forEach { destination ->
             val selected =
                 currentDestination?.hierarchy?.any { it.route == destination.route } == true
-
-            val primaryColor = MaterialTheme.colorScheme.primary
-            val onSurfaceVariantColor = MaterialTheme.colorScheme.onSurfaceVariant
 
             NavigationBarItem(
                 icon = {
@@ -78,7 +71,6 @@ fun MainNavigationBar(
                             id = if (selected) destination.iconFilledResId else destination.iconOutlinedResId
                         ),
                         contentDescription = null,
-                        tint = if (selected) primaryColor else onSurfaceVariantColor,
                         modifier = Modifier.size(24.dp)
                     )
                 },
@@ -86,7 +78,6 @@ fun MainNavigationBar(
                     Text(
                         text = stringResource(id = destination.labelResId),
                         fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
-                        color = if (selected) primaryColor else onSurfaceVariantColor
                     )
                 },
                 selected = selected,
