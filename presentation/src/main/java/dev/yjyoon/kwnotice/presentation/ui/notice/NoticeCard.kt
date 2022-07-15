@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,6 +28,7 @@ import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeBadge
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeRoundRect
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
+import dev.yjyoon.kwnotice.presentation.ui.webview.WebViewActivity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -36,8 +38,13 @@ fun NoticeCard(
     bookmarked: Boolean,
     onToggleBookmark: (Notice, Boolean) -> Unit
 ) {
+    val context = LocalContext.current
+
     ElevatedCard(
-        onClick = { },
+        onClick = {
+            val intent = WebViewActivity.getIntent(context, notice.url)
+            context.startActivity(intent)
+        },
         modifier = Modifier.height(IntrinsicSize.Min)
     ) {
         Row(
