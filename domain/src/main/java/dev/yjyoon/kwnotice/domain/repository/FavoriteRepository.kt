@@ -1,6 +1,7 @@
 package dev.yjyoon.kwnotice.domain.repository
 
 import dev.yjyoon.kwnotice.domain.model.Favorite
+import kotlinx.coroutines.flow.Flow
 
 interface FavoriteRepository {
 
@@ -11,4 +12,6 @@ interface FavoriteRepository {
     suspend fun getFavoriteKwHomeIds(): Result<List<Long>>
 
     suspend fun getFavoriteSwCentralIds(): Result<List<Long>>
+
+    fun getAllFavoritesStream(): Flow<List<Favorite>>
 }
