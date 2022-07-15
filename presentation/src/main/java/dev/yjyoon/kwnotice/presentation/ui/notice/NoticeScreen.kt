@@ -44,7 +44,9 @@ fun NoticeScreen(
     NoticeScreen(
         uiState = uiState,
         onRefresh = viewModel::refresh,
-        isLoading = viewModel::isLoading
+        isLoading = viewModel::isLoading,
+        onAddToFavorite = viewModel::addFavorite,
+        onDeleteFromFavorite = viewModel::deleteFavorite
     )
 }
 
@@ -53,7 +55,9 @@ fun NoticeScreen(
 fun NoticeScreen(
     uiState: NoticeUiState,
     onRefresh: () -> Unit,
-    isLoading: () -> Boolean
+    isLoading: () -> Boolean,
+    onAddToFavorite: (Notice) -> Unit,
+    onDeleteFromFavorite: (Notice) -> Unit
 ) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
@@ -89,10 +93,18 @@ fun NoticeScreen(
             ) { tab ->
                 when (tab) {
                     NoticeTab.KwHome.ordinal -> {
-                        KwHomeContent(uiState = uiState.kwHomeNoticeUiState)
+                        KwHomeContent(
+                            uiState = uiState.kwHomeNoticeUiState,
+                            onAddToFavorite = onAddToFavorite,
+                            onDeleteFromFavorite = onDeleteFromFavorite
+                        )
                     }
                     NoticeTab.SwCentral.ordinal -> {
-                        SwCentralContent(uiState = uiState.swCentralNoticeUiState)
+                        SwCentralContent(
+                            uiState = uiState.swCentralNoticeUiState,
+                            onAddToFavorite = onAddToFavorite,
+                            onDeleteFromFavorite = onDeleteFromFavorite
+                        )
                     }
                 }
             }
@@ -128,6 +140,7 @@ private fun NoticeScreenPreview() {
         NoticeScreen(
             uiState = NoticeUiState(
                 kwHomeNoticeUiState = KwHomeNoticeUiState.Success(
+                    notices =
                     List(10) {
                         Notice.KwHome(
                             id = 0,
@@ -138,12 +151,15 @@ private fun NoticeScreenPreview() {
                             postedDate = LocalDate.now(),
                             modifiedDate = LocalDate.now()
                         )
-                    }
+                    },
+                    favoriteIds = emptyList()
                 ),
                 swCentralNoticeUiState = SwCentralNoticeUiState.Failure
             ),
             onRefresh = {},
-            isLoading = { false }
+            isLoading = { false },
+            onAddToFavorite = {},
+            onDeleteFromFavorite = {}
         )
     }
 }

@@ -2,6 +2,12 @@ package dev.yjyoon.kwnotice.presentation.ui.notice
 
 import android.util.Log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yjyoon.kwnotice.domain.model.Notice
+import dev.yjyoon.kwnotice.domain.model.toFavorite
+import dev.yjyoon.kwnotice.domain.usecase.AddFavoriteUseCase
+import dev.yjyoon.kwnotice.domain.usecase.DeleteFavoriteUseCase
+import dev.yjyoon.kwnotice.domain.usecase.GetFavoriteKwIdListUseCase
+import dev.yjyoon.kwnotice.domain.usecase.GetFavoriteSwIdListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.GetKwHomeNoticeListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.GetSwCentralNoticeListUseCase
 import dev.yjyoon.kwnotice.presentation.ui.base.BaseViewModel
@@ -14,7 +20,11 @@ import javax.inject.Inject
 @HiltViewModel
 class NoticeViewModel @Inject constructor(
     private val getKwHomeNoticeListUseCase: GetKwHomeNoticeListUseCase,
-    private val getSwCentralNoticeListUseCase: GetSwCentralNoticeListUseCase
+    private val getSwCentralNoticeListUseCase: GetSwCentralNoticeListUseCase,
+    private val getFavoriteKwIdListUseCase: GetFavoriteKwIdListUseCase,
+    private val getFavoriteSwIdListUseCase: GetFavoriteSwIdListUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(NoticeUiState.Loading)
@@ -25,11 +35,22 @@ class NoticeViewModel @Inject constructor(
     }
 
     private fun fetch() {
+        fetchKwHome()
+        fetchSwCentral()
+    }
+
+    private fun fetchKwHome() {
         launch {
             getKwHomeNoticeListUseCase()
                 .onSuccess { notices ->
+                    val favoriteIds = getFavoriteKwIdListUseCase().getOrThrow()
                     _uiState.update {
-                        it.copy(kwHomeNoticeUiState = KwHomeNoticeUiState.Success(notices))
+                        it.copy(
+                            kwHomeNoticeUiState = KwHomeNoticeUiState.Success(
+                                notices = notices,
+                                favoriteIds = favoriteIds
+                            )
+                        )
                     }
                 }
                 .onFailure { throwable ->
@@ -38,11 +59,21 @@ class NoticeViewModel @Inject constructor(
                     }
                     Log.e(null, throwable.stackTraceToString())
                 }
+        }
+    }
 
+    private fun fetchSwCentral() {
+        launch {
             getSwCentralNoticeListUseCase()
                 .onSuccess { notices ->
+                    val favoriteIds = getFavoriteSwIdListUseCase().getOrThrow()
                     _uiState.update {
-                        it.copy(swCentralNoticeUiState = SwCentralNoticeUiState.Success(notices))
+                        it.copy(
+                            swCentralNoticeUiState = SwCentralNoticeUiState.Success(
+                                notices = notices,
+                                favoriteIds = favoriteIds
+                            )
+                        )
                     }
                 }
                 .onFailure { throwable ->
@@ -51,6 +82,52 @@ class NoticeViewModel @Inject constructor(
                     }
                     Log.e(null, throwable.stackTraceToString())
                 }
+        }
+    }
+
+    fun addFavorite(notice: Notice) {
+        launch {
+            addFavoriteUseCase(notice.toFavorite())
+                .onSuccess { refreshFavorite(notice) }
+        }
+    }
+
+    fun deleteFavorite(notice: Notice) {
+        launch {
+            deleteFavoriteUseCase(notice.toFavorite())
+                .onSuccess { refreshFavorite(notice) }
+        }
+
+    }
+
+    private fun refreshFavorite(notice: Notice) {
+        when (notice) {
+            is Notice.KwHome -> launch {
+                getFavoriteKwIdListUseCase()
+                    .onSuccess { ids ->
+                        _uiState.update {
+                            it.copy(
+                                kwHomeNoticeUiState = KwHomeNoticeUiState.Success(
+                                    notices = (_uiState.value.kwHomeNoticeUiState as KwHomeNoticeUiState.Success).notices,
+                                    favoriteIds = ids
+                                )
+                            )
+                        }
+                    }
+            }
+            is Notice.SwCentral -> launch {
+                getFavoriteSwIdListUseCase()
+                    .onSuccess { ids ->
+                        _uiState.update {
+                            it.copy(
+                                swCentralNoticeUiState = SwCentralNoticeUiState.Success(
+                                    notices = (_uiState.value.swCentralNoticeUiState as SwCentralNoticeUiState.Success).notices,
+                                    favoriteIds = ids
+                                )
+                            )
+                        }
+                    }
+            }
         }
     }
 

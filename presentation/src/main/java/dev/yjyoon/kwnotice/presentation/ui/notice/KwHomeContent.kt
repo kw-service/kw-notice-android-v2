@@ -11,11 +11,17 @@ import dev.yjyoon.kwnotice.domain.model.Notice
 
 @Composable
 fun KwHomeContent(
-    uiState: KwHomeNoticeUiState
+    uiState: KwHomeNoticeUiState,
+    onAddToFavorite: (Notice) -> Unit,
+    onDeleteFromFavorite: (Notice) -> Unit
 ) {
     when (uiState) {
         is KwHomeNoticeUiState.Success -> {
-            KwHomeNoticeColumn(uiState.notices)
+            KwHomeNoticeColumn(
+                uiState = uiState,
+                onAddToFavorite = onAddToFavorite,
+                onDeleteFromFavorite = onDeleteFromFavorite
+            )
         }
         KwHomeNoticeUiState.Loading -> {
             CircularProgressIndicator()
@@ -27,13 +33,26 @@ fun KwHomeContent(
 }
 
 @Composable
-fun KwHomeNoticeColumn(notices: List<Notice.KwHome>) {
+fun KwHomeNoticeColumn(
+    uiState: KwHomeNoticeUiState.Success,
+    onAddToFavorite: (Notice) -> Unit,
+    onDeleteFromFavorite: (Notice) -> Unit
+) {
     LazyColumn(
         contentPadding = PaddingValues(18.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
-        items(notices) {
-            NoticeCard(notice = it, bookmarked = false, onToggleBookmark = { _, _ -> })
+        items(uiState.notices) {
+            NoticeCard(
+                notice = it,
+                bookmarked = uiState.favoriteIds.contains(it.id),
+                onToggleBookmark = { notice, bookmarked ->
+                    if (bookmarked) {
+                        onAddToFavorite(notice)
+                    } else {
+                        onDeleteFromFavorite(notice)
+                    }
+                })
         }
     }
 }
