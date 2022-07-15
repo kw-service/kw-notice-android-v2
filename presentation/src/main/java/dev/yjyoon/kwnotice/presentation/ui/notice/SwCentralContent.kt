@@ -11,11 +11,17 @@ import dev.yjyoon.kwnotice.domain.model.Notice
 
 @Composable
 fun SwCentralContent(
-    uiState: SwCentralNoticeUiState
+    uiState: SwCentralNoticeUiState,
+    onAddToFavorite: (Notice) -> Unit,
+    onDeleteFromFavorite: (Notice) -> Unit
 ) {
     when (uiState) {
         is SwCentralNoticeUiState.Success -> {
-            SwCentralNoticeColumn(uiState.notices)
+            SwCentralNoticeColumn(
+                uiState = uiState,
+                onAddToFavorite = onAddToFavorite,
+                onDeleteFromFavorite = onDeleteFromFavorite
+            )
         }
         SwCentralNoticeUiState.Loading -> {
             CircularProgressIndicator()
@@ -27,13 +33,26 @@ fun SwCentralContent(
 }
 
 @Composable
-fun SwCentralNoticeColumn(notices: List<Notice.SwCentral>) {
+fun SwCentralNoticeColumn(
+    uiState: SwCentralNoticeUiState.Success,
+    onAddToFavorite: (Notice) -> Unit,
+    onDeleteFromFavorite: (Notice) -> Unit
+) {
     LazyColumn(
         contentPadding = PaddingValues(18.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
-        items(notices) {
-            NoticeCard(notice = it, bookmarked = false, onToggleBookmark = { _, _ -> })
+        items(uiState.notices) {
+            NoticeCard(
+                notice = it,
+                bookmarked = uiState.favoriteIds.contains(it.id),
+                onToggleBookmark = { notice, bookmarked ->
+                    if (bookmarked) {
+                        onAddToFavorite(notice)
+                    } else {
+                        onDeleteFromFavorite(notice)
+                    }
+                })
         }
     }
 }
