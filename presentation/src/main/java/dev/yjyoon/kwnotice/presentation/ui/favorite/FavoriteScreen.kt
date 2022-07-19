@@ -3,8 +3,6 @@ package dev.yjyoon.kwnotice.presentation.ui.favorite
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -14,7 +12,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import dev.yjyoon.kwnotice.domain.model.Favorite
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeLoading
-import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTopAppBar
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeSearchTopAppBar
 
 @Composable
 fun FavoriteScreen(
@@ -22,9 +20,12 @@ fun FavoriteScreen(
     onClickNotice: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val filterState by viewModel.filterState.collectAsState()
 
     FavoriteScreen(
         uiState = uiState,
+        filterState = filterState,
+        onSearch = viewModel::setTitleFilter,
         onClickFavorite = onClickNotice,
         onUnbookmark = viewModel::deleteFromFavorite
     )
@@ -33,16 +34,17 @@ fun FavoriteScreen(
 @Composable
 fun FavoriteScreen(
     uiState: FavoriteUiState,
+    filterState: FavoriteFilterState,
+    onSearch: (String) -> Unit,
     onClickFavorite: (String) -> Unit,
     onUnbookmark: (Favorite) -> Unit
 ) {
     Column(
         Modifier.fillMaxSize()
     ) {
-        KwNoticeTopAppBar(
+        KwNoticeSearchTopAppBar(
             titleText = stringResource(id = R.string.navigation_favorite),
-            actionIcon = Icons.Outlined.Search,
-            onActionClick = {}
+            onSearch = onSearch
         )
         Box(
             Modifier.weight(1f)
@@ -51,6 +53,7 @@ fun FavoriteScreen(
                 is FavoriteUiState.Success -> {
                     FavoriteContent(
                         favorites = uiState.favorites,
+                        filterState = filterState,
                         onClickFavorite = onClickFavorite,
                         onUnbookmark = onUnbookmark
                     )
