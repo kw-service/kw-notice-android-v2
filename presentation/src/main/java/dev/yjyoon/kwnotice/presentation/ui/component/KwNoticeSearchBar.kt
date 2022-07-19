@@ -1,5 +1,6 @@
 package dev.yjyoon.kwnotice.presentation.ui.component
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,6 +42,7 @@ fun KwNoticeSearchBar(
     onClose: () -> Unit,
 ) {
     var text by remember { mutableStateOf("") }
+    val color = if (isSystemInDarkTheme()) Color.White else Color.Black
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
@@ -56,7 +58,7 @@ fun KwNoticeSearchBar(
             placeholder = {
                 Text(
                     stringResource(id = R.string.searchbar_placeholder),
-                    color = Color.Black.copy(alpha = 0.15f),
+                    color = color.copy(alpha = 0.15f),
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 1
                 )
@@ -83,7 +85,7 @@ fun KwNoticeSearchBar(
             singleLine = true,
             shape = RoundedCornerShape(12.dp),
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.Black.copy(alpha = 0.05f),
+                containerColor = color.copy(alpha = 0.05f),
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
