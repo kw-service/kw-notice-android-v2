@@ -10,11 +10,14 @@ import dev.yjyoon.kwnotice.domain.usecase.favorite.GetAllFavoriteListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.notice.GetKwHomeNoticeListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.notice.GetSwCentralNoticeListUseCase
 import dev.yjyoon.kwnotice.presentation.ui.base.BaseViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,6 +57,9 @@ class NoticeViewModel @Inject constructor(
         )
     }.stateIn(viewModelScope, SharingStarted.Eagerly, NoticeUiState.Loading)
 
+    private val _filterState = MutableStateFlow(NoticeFilterState.Unspecified)
+    val filterState: StateFlow<NoticeFilterState> = _filterState.asStateFlow()
+
     fun addFavorite(notice: Notice) {
         launch {
             addFavoriteUseCase(notice.toFavorite())
@@ -64,6 +70,23 @@ class NoticeViewModel @Inject constructor(
         launch {
             deleteFavoriteUseCase(notice.toFavorite())
         }
+    }
 
+    fun setTitleFilter(title: String) {
+        _filterState.update {
+            it.copy(title = title.trim())
+        }
+    }
+
+    fun setTagFilter(tag: String) {
+        _filterState.update {
+            it.copy(tag = tag)
+        }
+    }
+
+    fun setDepartmentFilter(department: String) {
+        _filterState.update {
+            it.copy(department = department)
+        }
     }
 }
