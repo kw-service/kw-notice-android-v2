@@ -21,7 +21,13 @@ class FavoriteViewModel @Inject constructor(
     private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : BaseViewModel() {
 
-    val uiState = getAllFavoriteListUseCase().map { FavoriteUiState.Success(it) }
+    val uiState = getAllFavoriteListUseCase().map {
+        FavoriteUiState.Success(
+            favorites = it,
+            types = it.map { favorite -> favorite.type }.distinct(),
+            months = it.map { favorite -> favorite.date.monthValue }.distinct()
+        )
+    }
         .stateIn(
             viewModelScope,
             SharingStarted.Eagerly,
@@ -40,13 +46,19 @@ class FavoriteViewModel @Inject constructor(
 
     fun setTitleFilter(title: String) {
         _filterState.update {
-            it.copy(title = title)
+            it.copy(title = title.trim())
         }
     }
 
-    fun setTypeFilter(type: Favorite.Type) {
+    fun setTypeFilter(type: String?) {
         _filterState.update {
-            it.copy(type = type)
+            it.copy(type = type?.let { type -> Favorite.Companion.stringToType(type) })
+        }
+    }
+
+    fun setMonthFilter(month: String?) {
+        _filterState.update {
+            it.copy(month = month)
         }
     }
 }
