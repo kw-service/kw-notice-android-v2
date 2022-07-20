@@ -20,7 +20,10 @@ data class NoticeUiState(
 
 sealed interface KwHomeNoticeUiState {
     data class Success(
-        val notices: List<Notice.KwHome>
+        val notices: List<Notice.KwHome>,
+        val tags: List<String>,
+        val departments: List<String>,
+        val months: List<Int>
     ) : KwHomeNoticeUiState
 
     object Loading : KwHomeNoticeUiState
@@ -29,7 +32,8 @@ sealed interface KwHomeNoticeUiState {
 
 sealed interface SwCentralNoticeUiState {
     data class Success(
-        val notices: List<Notice.SwCentral>
+        val notices: List<Notice.SwCentral>,
+        val months: List<Int>
     ) : SwCentralNoticeUiState
 
     object Loading : SwCentralNoticeUiState

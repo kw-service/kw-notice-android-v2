@@ -44,12 +44,20 @@ class NoticeViewModel @Inject constructor(
     ) { kwHomeNotices, swCentralNotices, favoriteNotices ->
         NoticeUiState(
             kwHomeNoticeUiState = if (kwHomeNotices != null) {
-                KwHomeNoticeUiState.Success(kwHomeNotices)
+                KwHomeNoticeUiState.Success(
+                    notices = kwHomeNotices,
+                    tags = kwHomeNotices.map { it.tag }.distinct(),
+                    departments = kwHomeNotices.map { it.department }.distinct(),
+                    months = kwHomeNotices.map { it.modifiedDate.monthValue }.distinct()
+                )
             } else {
                 KwHomeNoticeUiState.Failure
             },
             swCentralNoticeUiState = if (swCentralNotices != null) {
-                SwCentralNoticeUiState.Success(swCentralNotices)
+                SwCentralNoticeUiState.Success(
+                    notices = swCentralNotices,
+                    months = swCentralNotices.map { it.postedDate.monthValue }.distinct()
+                )
             } else {
                 SwCentralNoticeUiState.Failure
             },
@@ -78,15 +86,21 @@ class NoticeViewModel @Inject constructor(
         }
     }
 
-    fun setTagFilter(tag: String) {
+    fun setTagFilter(tag: String?) {
         _filterState.update {
             it.copy(tag = tag)
         }
     }
 
-    fun setDepartmentFilter(department: String) {
+    fun setDepartmentFilter(department: String?) {
         _filterState.update {
             it.copy(department = department)
+        }
+    }
+
+    fun setMonthFilter(month: String?) {
+        _filterState.update {
+            it.copy(month = month)
         }
     }
 }

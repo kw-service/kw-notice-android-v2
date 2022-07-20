@@ -27,7 +27,9 @@ fun FavoriteScreen(
         filterState = filterState,
         onSearch = viewModel::setTitleFilter,
         onClickFavorite = onClickNotice,
-        onUnbookmark = viewModel::deleteFromFavorite
+        onUnbookmark = viewModel::deleteFromFavorite,
+        onTypeFilterChange = viewModel::setTypeFilter,
+        onMonthFilterChange = viewModel::setMonthFilter
     )
 }
 
@@ -37,7 +39,9 @@ fun FavoriteScreen(
     filterState: FavoriteFilterState,
     onSearch: (String) -> Unit,
     onClickFavorite: (String) -> Unit,
-    onUnbookmark: (Favorite) -> Unit
+    onUnbookmark: (Favorite) -> Unit,
+    onTypeFilterChange: (String?) -> Unit,
+    onMonthFilterChange: (String?) -> Unit
 ) {
     Column(
         Modifier.fillMaxSize()
@@ -52,10 +56,12 @@ fun FavoriteScreen(
             when (uiState) {
                 is FavoriteUiState.Success -> {
                     FavoriteContent(
-                        favorites = uiState.favorites,
+                        uiState = uiState,
                         filterState = filterState,
                         onClickFavorite = onClickFavorite,
-                        onUnbookmark = onUnbookmark
+                        onUnbookmark = onUnbookmark,
+                        onTypeFilterChange = onTypeFilterChange,
+                        onMonthFilterChange = onMonthFilterChange
                     )
                 }
                 FavoriteUiState.Loading -> {

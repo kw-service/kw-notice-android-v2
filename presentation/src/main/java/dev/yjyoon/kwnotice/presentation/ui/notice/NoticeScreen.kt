@@ -45,7 +45,8 @@ fun NoticeScreen(
         onDeleteFromFavorite = viewModel::deleteFavorite,
         onSearch = viewModel::setTitleFilter,
         onTagFilterChange = viewModel::setTagFilter,
-        onDepartmentFilterChange = viewModel::setDepartmentFilter
+        onDepartmentFilterChange = viewModel::setDepartmentFilter,
+        onMonthFilterChange = viewModel::setMonthFilter
     )
 }
 
@@ -59,8 +60,9 @@ fun NoticeScreen(
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit,
     onSearch: (String) -> Unit,
-    onTagFilterChange: (String) -> Unit,
-    onDepartmentFilterChange: (String) -> Unit
+    onTagFilterChange: (String?) -> Unit,
+    onDepartmentFilterChange: (String?) -> Unit,
+    onMonthFilterChange: (String?) -> Unit
 ) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
@@ -103,7 +105,10 @@ fun NoticeScreen(
                             onAddToFavorite = onAddToFavorite,
                             onDeleteFromFavorite = onDeleteFromFavorite,
                             favoriteNotices = favoriteNotices,
-                            filterState = filterState
+                            filterState = filterState,
+                            onTagFilterChange = onTagFilterChange,
+                            onDepartmentFilterChange = onDepartmentFilterChange,
+                            onMonthFilterChange = onMonthFilterChange
                         )
                     }
                     NoticeTab.SwCentral.ordinal -> {
@@ -113,7 +118,8 @@ fun NoticeScreen(
                             onAddToFavorite = onAddToFavorite,
                             onDeleteFromFavorite = onDeleteFromFavorite,
                             favoriteNotices = favoriteNotices,
-                            filterState = filterState
+                            filterState = filterState,
+                            onMonthFilterChange = onMonthFilterChange
                         )
                     }
                 }
@@ -129,7 +135,7 @@ private fun NoticeScreenPreview() {
         NoticeScreen(
             uiState = NoticeUiState(
                 kwHomeNoticeUiState = KwHomeNoticeUiState.Success(
-                    List(10) {
+                    notices = List(10) {
                         Notice.KwHome(
                             id = 0,
                             title = "[학사] 2022학년도 1학기 성적 확인 및 성적증명서 발급 안내",
@@ -139,7 +145,10 @@ private fun NoticeScreenPreview() {
                             postedDate = LocalDate.now(),
                             modifiedDate = LocalDate.now()
                         )
-                    }
+                    },
+                    tags = listOf("전체"),
+                    departments = listOf("전체 부서"),
+                    months = listOf(1)
                 ),
                 swCentralNoticeUiState = SwCentralNoticeUiState.Failure,
                 favoriteNotices = emptyList()
@@ -151,7 +160,8 @@ private fun NoticeScreenPreview() {
             onDeleteFromFavorite = {},
             onDepartmentFilterChange = {},
             onTagFilterChange = {},
-            onSearch = {}
+            onSearch = {},
+            onMonthFilterChange = {}
         )
     }
 }
