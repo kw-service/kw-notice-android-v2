@@ -47,7 +47,8 @@ fun KwNoticeTopAppBar(
 @Composable
 fun KwNoticeSearchTopAppBar(
     titleText: String,
-    onSearch: (String) -> Unit
+    onSearch: (String) -> Unit,
+    onCloseSearh: () -> Unit
 ) {
     var showSearchBar by remember { mutableStateOf(false) }
 
@@ -77,6 +78,7 @@ fun KwNoticeSearchTopAppBar(
                         Modifier.fillMaxWidth(),
                         onSearch = onSearch,
                         onClose = {
+                            onCloseSearh()
                             showSearchBar = false
                         }
                     )

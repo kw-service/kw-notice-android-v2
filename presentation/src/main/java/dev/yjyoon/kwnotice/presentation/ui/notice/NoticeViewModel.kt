@@ -103,4 +103,8 @@ class NoticeViewModel @Inject constructor(
             it.copy(month = month)
         }
     }
+
+    fun initFilter() {
+        _filterState.value = NoticeFilterState.Unspecified
+    }
 }
