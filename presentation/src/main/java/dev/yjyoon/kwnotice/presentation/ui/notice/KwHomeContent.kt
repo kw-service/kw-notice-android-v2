@@ -46,7 +46,7 @@ fun KwHomeContent(
                         items = uiState.tags,
                         onSelectItem = onTagFilterChange
                     )
-                    Spacer(Modifier.width(12.dp))
+                    Spacer(Modifier.width(8.dp))
                     KwNoticeDropdownMenu(
                         leadingIconRes = R.drawable.ic_group,
                         initialItem = stringResource(id = R.string.filter_department_all),
