@@ -8,6 +8,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,19 +38,24 @@ fun KwNoticeDropdownMenu(
         FilterChip(
             selected = expanded,
             onClick = { expanded = expanded.not() },
-            label = { Text(text = selectedItem) },
+            label = {
+                Text(
+                    text = selectedItem,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            },
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = leadingIconRes),
                     contentDescription = null,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(12.dp)
                 )
             },
             selectedIcon = {
                 Icon(
                     painter = painterResource(id = leadingIconRes),
                     contentDescription = null,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(12.dp)
                 )
             }
         )
@@ -57,13 +63,23 @@ fun KwNoticeDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            DropdownMenuItem(text = { Text(initialItem) }, onClick = {
+            DropdownMenuItem(text = {
+                Text(
+                    text = initialItem,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }, onClick = {
                 selectedItem = initialItem
                 expanded = false
                 onSelectItem(null)
             })
             items.forEach {
-                DropdownMenuItem(text = { Text(it) }, onClick = {
+                DropdownMenuItem(text = {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }, onClick = {
                     selectedItem = it
                     expanded = false
                     onSelectItem(it)

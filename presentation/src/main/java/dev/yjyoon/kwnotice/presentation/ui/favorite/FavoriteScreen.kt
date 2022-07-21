@@ -29,7 +29,8 @@ fun FavoriteScreen(
         onClickFavorite = onClickNotice,
         onUnbookmark = viewModel::deleteFromFavorite,
         onTypeFilterChange = viewModel::setTypeFilter,
-        onMonthFilterChange = viewModel::setMonthFilter
+        onMonthFilterChange = viewModel::setMonthFilter,
+        onInitFilter = viewModel::initFilter
     )
 }
 
@@ -41,14 +42,16 @@ fun FavoriteScreen(
     onClickFavorite: (String) -> Unit,
     onUnbookmark: (Favorite) -> Unit,
     onTypeFilterChange: (String?) -> Unit,
-    onMonthFilterChange: (String?) -> Unit
+    onMonthFilterChange: (String?) -> Unit,
+    onInitFilter: () -> Unit
 ) {
     Column(
         Modifier.fillMaxSize()
     ) {
         KwNoticeSearchTopAppBar(
             titleText = stringResource(id = R.string.navigation_favorite),
-            onSearch = onSearch
+            onSearch = onSearch,
+            onCloseSearh = onInitFilter
         )
         Box(
             Modifier.weight(1f)

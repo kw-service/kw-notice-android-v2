@@ -61,4 +61,8 @@ class FavoriteViewModel @Inject constructor(
             it.copy(month = month)
         }
     }
+
+    fun initFilter() {
+        _filterState.value = FavoriteFilterState.Unspecified
+    }
 }

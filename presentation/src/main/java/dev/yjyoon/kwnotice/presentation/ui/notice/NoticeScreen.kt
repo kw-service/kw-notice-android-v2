@@ -46,7 +46,8 @@ fun NoticeScreen(
         onSearch = viewModel::setTitleFilter,
         onTagFilterChange = viewModel::setTagFilter,
         onDepartmentFilterChange = viewModel::setDepartmentFilter,
-        onMonthFilterChange = viewModel::setMonthFilter
+        onMonthFilterChange = viewModel::setMonthFilter,
+        onInitFilter = viewModel::initFilter
     )
 }
 
@@ -62,7 +63,8 @@ fun NoticeScreen(
     onSearch: (String) -> Unit,
     onTagFilterChange: (String?) -> Unit,
     onDepartmentFilterChange: (String?) -> Unit,
-    onMonthFilterChange: (String?) -> Unit
+    onMonthFilterChange: (String?) -> Unit,
+    onInitFilter: () -> Unit
 ) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
@@ -75,7 +77,8 @@ fun NoticeScreen(
         Column {
             KwNoticeSearchTopAppBar(
                 titleText = stringResource(id = R.string.navigation_notice),
-                onSearch = onSearch
+                onSearch = onSearch,
+                onCloseSearh = onInitFilter
             )
             TabRow(
                 selectedTabIndex = pagerState.currentPage,
@@ -161,7 +164,8 @@ private fun NoticeScreenPreview() {
             onDepartmentFilterChange = {},
             onTagFilterChange = {},
             onSearch = {},
-            onMonthFilterChange = {}
+            onMonthFilterChange = {},
+            onInitFilter = {}
         )
     }
 }
