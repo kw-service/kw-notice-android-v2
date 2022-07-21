@@ -19,4 +19,9 @@
 
     <string name="settings_notification_new">새로운 공지사항 등록 알림</string>
     <string name="settings_notification_edit">기존 공지사항 수정 알림</string>
+    <string name="settings_app_info">앱 정보</string>
+    <string name="settings_dev_info">개발 정보</string>
+    <string name="settings_dev_email">yjyoon.dev@gmail.com</string>
+    <string name="settings_osl">오픈소스 라이센스</string>
+    <string name="settings_version">버전</string>
 </resources>

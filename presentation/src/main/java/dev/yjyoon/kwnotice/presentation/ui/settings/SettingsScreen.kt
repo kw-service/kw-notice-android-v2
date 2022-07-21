@@ -19,23 +19,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.kwnotice.domain.model.FcmTopic
+import dev.yjyoon.kwnotice.domain.model.VersionName
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeDivider
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeLoading
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeSwitchBar
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTopAppBar
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTouchBar
 import dev.yjyoon.kwnotice.presentation.ui.model.FcmTopicModel
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTypography
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel) {
+fun SettingsScreen(
+    viewModel: SettingsViewModel,
+    versionName: VersionName
+) {
     val uiState by viewModel.uiState.collectAsState()
 
     SettingsScreen(
         uiState = uiState,
         onSubscribe = viewModel::subscribeTo,
-        onUnsubscribe = viewModel::unsubscribeFrom
+        onUnsubscribe = viewModel::unsubscribeFrom,
+        versionName = versionName
     )
 }
 
@@ -43,14 +49,16 @@ fun SettingsScreen(viewModel: SettingsViewModel) {
 fun SettingsScreen(
     uiState: SettingsUiState,
     onSubscribe: (FcmTopic) -> Unit,
-    onUnsubscribe: (FcmTopic) -> Unit
+    onUnsubscribe: (FcmTopic) -> Unit,
+    versionName: VersionName
 ) {
     when (uiState) {
         is SettingsUiState.Success -> {
             SettingsContent(
                 uiState = uiState,
                 onSubscribe = onSubscribe,
-                onUnsubscribe = onUnsubscribe
+                onUnsubscribe = onUnsubscribe,
+                versionName = versionName
             )
         }
         SettingsUiState.Loading -> {
@@ -64,7 +72,8 @@ fun SettingsScreen(
 fun SettingsContent(
     uiState: SettingsUiState.Success,
     onSubscribe: (FcmTopic) -> Unit,
-    onUnsubscribe: (FcmTopic) -> Unit
+    onUnsubscribe: (FcmTopic) -> Unit,
+    versionName: VersionName
 ) {
     Column(
         Modifier.fillMaxSize()
@@ -102,6 +111,26 @@ fun SettingsContent(
             fcmTopicModel = FcmTopicModel(FcmTopic.SwCentralNew),
             onSubscribe = onSubscribe,
             onUnsubscribe = onUnsubscribe
+        )
+        KwNoticeDivider()
+        SettingsTitle(
+            Modifier.padding(horizontal = 16.dp),
+            text = stringResource(id = R.string.settings_app_info)
+        )
+        Spacer(Modifier.height(4.dp))
+        KwNoticeTouchBar(
+            title = stringResource(id = R.string.settings_dev_info),
+            subtitle = stringResource(id = R.string.settings_dev_email),
+            onClick = { /*TODO*/ }
+        )
+        KwNoticeTouchBar(
+            title = stringResource(id = R.string.settings_osl),
+            onClick = { /*TODO*/ }
+        )
+        KwNoticeTouchBar(
+            title = "${stringResource(id = R.string.settings_version)} $versionName",
+            isIconVisible = false,
+            onClick = { /*TODO*/ }
         )
     }
 }
@@ -155,7 +184,8 @@ private fun SettingsScreenPreview() {
                 )
             ),
             onSubscribe = {},
-            onUnsubscribe = {}
+            onUnsubscribe = {},
+            versionName = VersionName("2.0.0")
         )
     }
 }
