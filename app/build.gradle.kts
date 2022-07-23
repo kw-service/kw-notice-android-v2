@@ -14,7 +14,7 @@ android {
         applicationId = "dev.yjyoon.kwnotice"
         minSdk = 24
         targetSdk = 32
-        versionCode = 4
+        versionCode = 5
         versionName = "2.0.0"
     }
 
