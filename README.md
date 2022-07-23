@@ -1,3 +1,4 @@
+![image](https://user-images.githubusercontent.com/72238126/180598251-9c2a726d-6618-45d6-8565-633290d395fa.png)
 # KW Notice Android V2
 
 When a new notice is posted on the Kwangwoon University website, a push notification will be automatically sent to your device through the application. Also you can bookmark, search, and categorize notices on the application.
