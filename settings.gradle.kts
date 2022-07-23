@@ -5,6 +5,7 @@ pluginManagement {
         mavenCentral()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,5 +13,20 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "KW Notice"
-include(":app")
+
+includeAll(
+    "app",
+    "presentation",
+    "data",
+    "domain",
+)
+
+fun includeAll(vararg names: String) {
+    names.forEach { name ->
+        val projectName = ":$name"
+        include(projectName)
+        project(projectName).projectDir = file(name)
+    }
+}

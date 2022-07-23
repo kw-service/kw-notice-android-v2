@@ -1,6 +1,9 @@
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
+    id("com.android.application")
+    id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -11,13 +14,8 @@ android {
         applicationId = "dev.yjyoon.kwnotice"
         minSdk = 24
         targetSdk = 32
-        versionCode = 4
-        versionName = "2.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        versionCode = 5
+        versionName = "2.0.0"
     }
 
     buildTypes {
@@ -36,12 +34,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
-    }
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -50,12 +42,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":presentation"))
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation("androidx.activity:activity-compose:1.3.1")
-    implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha02")
-    testImplementation("junit:junit:4.13.2")
+    implementation(platform(libs.google.firebase.bom))
+    implementation(libs.google.firebase.messaging)
+    implementation(libs.google.firebase.analytics)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

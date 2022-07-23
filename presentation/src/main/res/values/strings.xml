@@ -1,0 +1,32 @@
+<resources>
+    <string name="kw_notice">KW 알리미</string>
+
+    <string name="kw_home">광운대학교</string>
+    <string name="sw_central">SW중심대학사업단</string>
+
+    <string name="navigation_notice">공지사항</string>
+    <string name="navigation_favorite">즐겨찾기</string>
+    <string name="navigation_settings">환경설정</string>
+
+    <string name="notice_date_format">M월 d일</string>
+    <string name="notice_network_fail">공지사항을 불러올 수 없습니다.\n네트워크 연결 상태를 확인해주세요!</string>
+
+    <string name="searchbar_placeholder">검색어를 입력해주세요</string>
+
+    <string name="filter_tag_all">전체</string>
+    <string name="filter_department_all">전체 부서</string>
+    <string name="filter_type_all">전체</string>
+    <string name="filter_month_all">전체 날짜</string>
+    <string name="month">월</string>
+
+    <string name="settings_notification_new">새로운 공지사항 등록 알림</string>
+    <string name="settings_notification_edit">기존 공지사항 수정 알림</string>
+    <string name="settings_app_info">앱 정보</string>
+    <string name="settings_dev_info">개발 정보</string>
+    <string name="settings_dev_email">yjyoon.dev@gmail.com</string>
+    <string name="settings_osl">오픈소스 라이센스</string>
+    <string name="settings_version">버전</string>
+    <string name="settings_copyright">"Copyright ⓒ %s All rights reserved."</string>
+    <string name="settings_dialog_text">본 애플리케이션은 광운대학교 재학생들을 위해 재학생이 비영리 목적으로 개발한 공지사항 알림 애플리케이션입니다.</string>
+    <string name="settings_dialog_ver">ver %s</string>
+</resources>
