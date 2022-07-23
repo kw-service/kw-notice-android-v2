@@ -37,6 +37,10 @@
             android:name=".presentation.ui.main.MainActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".presentation.ui.osl.OslActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".fcm.FcmService"
             android:exported="false">

@@ -1,4 +1,6 @@
 <resources>
+    <string name="kw_notice">KW 알리미</string>
+
     <string name="kw_home">광운대학교</string>
     <string name="sw_central">SW중심대학사업단</string>
 
@@ -19,4 +21,12 @@
 
     <string name="settings_notification_new">새로운 공지사항 등록 알림</string>
     <string name="settings_notification_edit">기존 공지사항 수정 알림</string>
+    <string name="settings_app_info">앱 정보</string>
+    <string name="settings_dev_info">개발 정보</string>
+    <string name="settings_dev_email">yjyoon.dev@gmail.com</string>
+    <string name="settings_osl">오픈소스 라이센스</string>
+    <string name="settings_version">버전</string>
+    <string name="settings_copyright">"Copyright ⓒ %s All rights reserved."</string>
+    <string name="settings_dialog_text">본 애플리케이션은 광운대학교 재학생들을 위해 재학생이 비영리 목적으로 개발한 공지사항 알림 애플리케이션입니다.</string>
+    <string name="settings_dialog_ver">ver %s</string>
 </resources>

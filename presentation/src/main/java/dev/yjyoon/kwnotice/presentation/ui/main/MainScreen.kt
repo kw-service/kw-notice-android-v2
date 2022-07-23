@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import dev.yjyoon.kwnotice.domain.model.VersionName
 import dev.yjyoon.kwnotice.presentation.ui.favorite.FavoriteScreen
 import dev.yjyoon.kwnotice.presentation.ui.notice.NoticeScreen
 import dev.yjyoon.kwnotice.presentation.ui.settings.SettingsScreen
@@ -29,7 +30,9 @@ import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 
 @Composable
 fun MainScreen(
-    onClickNotice: (String) -> Unit
+    onClickNotice: (String) -> Unit,
+    onClickOsl: () -> Unit,
+    versionName: VersionName
 ) {
     val navController = rememberAnimatedNavController()
     val navigation = rememberMainNavigation(navController)
@@ -51,7 +54,13 @@ fun MainScreen(
         ) {
             composable(MainDestination.Notice.route) { NoticeScreen(onClickNotice = onClickNotice) }
             composable(MainDestination.Favorite.route) { FavoriteScreen(onClickNotice = onClickNotice) }
-            composable(MainDestination.Settings.route) { SettingsScreen(viewModel = hiltViewModel()) }
+            composable(MainDestination.Settings.route) {
+                SettingsScreen(
+                    viewModel = hiltViewModel(),
+                    onClickOsl = onClickOsl,
+                    versionName = versionName
+                )
+            }
         }
     }
 }
