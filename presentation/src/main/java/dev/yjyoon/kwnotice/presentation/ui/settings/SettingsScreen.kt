@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,6 +34,7 @@ import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTypography
 @Composable
 fun SettingsScreen(
     viewModel: SettingsViewModel,
+    onClickOsl: () -> Unit,
     versionName: VersionName
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -41,6 +43,7 @@ fun SettingsScreen(
         uiState = uiState,
         onSubscribe = viewModel::subscribeTo,
         onUnsubscribe = viewModel::unsubscribeFrom,
+        onClickOsl = onClickOsl,
         versionName = versionName
     )
 }
@@ -50,6 +53,7 @@ fun SettingsScreen(
     uiState: SettingsUiState,
     onSubscribe: (FcmTopic) -> Unit,
     onUnsubscribe: (FcmTopic) -> Unit,
+    onClickOsl: () -> Unit,
     versionName: VersionName
 ) {
     when (uiState) {
@@ -58,6 +62,7 @@ fun SettingsScreen(
                 uiState = uiState,
                 onSubscribe = onSubscribe,
                 onUnsubscribe = onUnsubscribe,
+                onClickOsl = onClickOsl,
                 versionName = versionName
             )
         }
@@ -73,8 +78,11 @@ fun SettingsContent(
     uiState: SettingsUiState.Success,
     onSubscribe: (FcmTopic) -> Unit,
     onUnsubscribe: (FcmTopic) -> Unit,
+    onClickOsl: () -> Unit,
     versionName: VersionName
 ) {
+    val uriHandler = LocalUriHandler.current
+
     Column(
         Modifier.fillMaxSize()
     ) {
@@ -121,16 +129,16 @@ fun SettingsContent(
         KwNoticeTouchBar(
             title = stringResource(id = R.string.settings_dev_info),
             subtitle = stringResource(id = R.string.settings_dev_email),
-            onClick = { /*TODO*/ }
+            onClick = { uriHandler.openUri(SettingsViewModel.GITHUB_URL) }
         )
         KwNoticeTouchBar(
             title = stringResource(id = R.string.settings_osl),
-            onClick = { /*TODO*/ }
+            onClick = onClickOsl
         )
         KwNoticeTouchBar(
             title = "${stringResource(id = R.string.settings_version)} $versionName",
             isIconVisible = false,
-            onClick = { /*TODO*/ }
+            onClick = { uriHandler.openUri(SettingsViewModel.PLAYSTORE_URL) }
         )
     }
 }
@@ -185,6 +193,7 @@ private fun SettingsScreenPreview() {
             ),
             onSubscribe = {},
             onUnsubscribe = {},
+            onClickOsl = {},
             versionName = VersionName("2.0.0")
         )
     }

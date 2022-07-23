@@ -41,4 +41,10 @@ class SettingsViewModel @Inject constructor(
                 .onFailure { subscribeFcmTopicUseCase(topic) }
         }
     }
+
+    companion object {
+        const val GITHUB_URL = "https://github.com/kw-notice/kw-notice-android-v2"
+        const val PLAYSTORE_URL =
+            "https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice"
+    }
 }

@@ -31,6 +31,7 @@ import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 @Composable
 fun MainScreen(
     onClickNotice: (String) -> Unit,
+    onClickOsl: () -> Unit,
     versionName: VersionName
 ) {
     val navController = rememberAnimatedNavController()
@@ -56,6 +57,7 @@ fun MainScreen(
             composable(MainDestination.Settings.route) {
                 SettingsScreen(
                     viewModel = hiltViewModel(),
+                    onClickOsl = onClickOsl,
                     versionName = versionName
                 )
             }
