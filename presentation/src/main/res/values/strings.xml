@@ -24,4 +24,5 @@
     <string name="settings_dev_email">yjyoon.dev@gmail.com</string>
     <string name="settings_osl">오픈소스 라이센스</string>
     <string name="settings_version">버전</string>
+    <string name="settings_copyright">"Copyright ⓒ %s All rights reserved."</string>
 </resources>
