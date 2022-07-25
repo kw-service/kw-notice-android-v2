@@ -1,9 +1,14 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.library")
     id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
 }
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "dev.yjyoon.kwnotice.data"
@@ -12,6 +17,8 @@ android {
     defaultConfig {
         minSdk = 24
         targetSdk = 32
+
+        buildConfigField("String", "BASE_URL", properties["base_url"] as String)
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
