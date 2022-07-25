@@ -22,11 +22,15 @@ class FavoriteViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val uiState = getAllFavoriteListUseCase().map {
-        FavoriteUiState.Success(
-            favorites = it,
-            types = it.map { favorite -> favorite.type }.distinct(),
-            months = it.map { favorite -> favorite.date.monthValue }.distinct()
-        )
+        if (it.isNotEmpty()) {
+            FavoriteUiState.Success(
+                favorites = it,
+                types = it.map { favorite -> favorite.type }.distinct(),
+                months = it.map { favorite -> favorite.date.monthValue }.distinct()
+            )
+        } else {
+            FavoriteUiState.Empty
+        }
     }
         .stateIn(
             viewModelScope,

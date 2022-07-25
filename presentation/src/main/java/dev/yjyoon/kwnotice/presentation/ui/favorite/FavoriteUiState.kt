@@ -9,6 +9,7 @@ sealed interface FavoriteUiState {
         val months: List<Int>
     ) : FavoriteUiState
 
+    object Empty : FavoriteUiState
     object Loading : FavoriteUiState
     object Failure : FavoriteUiState
 }
