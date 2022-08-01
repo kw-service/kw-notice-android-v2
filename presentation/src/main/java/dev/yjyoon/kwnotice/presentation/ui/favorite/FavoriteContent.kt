@@ -25,7 +25,8 @@ fun FavoriteContent(
     onClickFavorite: (String) -> Unit,
     onUnbookmark: (Favorite) -> Unit,
     onTypeFilterChange: (String?) -> Unit,
-    onMonthFilterChange: (String?) -> Unit
+    onMonthFilterChange: (String?) -> Unit,
+    showUndoSnackbar: (Favorite) -> Unit
 ) {
     Column(Modifier.fillMaxSize()) {
         Row(
@@ -56,7 +57,8 @@ fun FavoriteContent(
                 FavoriteCard(
                     favorite = it,
                     onClickFavorite = onClickFavorite,
-                    onUnbookmark = onUnbookmark
+                    onUnbookmark = onUnbookmark,
+                    showUndoSnackbar = showUndoSnackbar
                 )
             }
         }

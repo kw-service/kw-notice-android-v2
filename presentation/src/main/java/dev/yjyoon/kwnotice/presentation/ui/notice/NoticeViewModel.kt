@@ -70,13 +70,13 @@ class NoticeViewModel @Inject constructor(
 
     fun addFavorite(notice: Notice) {
         launch {
-            addFavoriteUseCase(notice.toFavorite())
+            addFavoriteUseCase(notice.toFavorite()).getOrThrow()
         }
     }
 
     fun deleteFavorite(notice: Notice) {
         launch {
-            deleteFavoriteUseCase(notice.toFavorite())
+            deleteFavoriteUseCase(notice.toFavorite()).getOrThrow()
         }
     }
 
