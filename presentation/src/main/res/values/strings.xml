@@ -21,6 +21,8 @@
     <string name="filter_month_all">전체 날짜</string>
     <string name="month">월</string>
 
+    <string name="open_in_browser">웹으로 열기</string>
+
     <string name="settings_notification_new">새로운 공지사항 등록 알림</string>
     <string name="settings_notification_edit">기존 공지사항 수정 알림</string>
     <string name="settings_app_info">앱 정보</string>
