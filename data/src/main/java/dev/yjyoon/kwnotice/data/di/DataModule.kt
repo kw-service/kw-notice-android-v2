@@ -11,6 +11,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dev.yjyoon.kwnotice.data.BuildConfig
 import dev.yjyoon.kwnotice.data.local.dao.FavoriteDao
 import dev.yjyoon.kwnotice.data.local.db.FavoriteDatabase
 import dev.yjyoon.kwnotice.data.remote.api.NoticeService
@@ -26,7 +27,7 @@ internal object DataModule {
     @Provides
     @Singleton
     @Named("BaseUrl")
-    fun provideBaseUrl(): String = "https://n6f11u33jf.execute-api.ap-northeast-2.amazonaws.com/v1/"
+    fun provideBaseUrl(): String = BuildConfig.BASE_URL
 
     @Provides
     @Singleton

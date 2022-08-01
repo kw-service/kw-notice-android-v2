@@ -12,7 +12,7 @@ https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice
 
 # Architectures
 - MVVM + Clean Architecture
-- Mutli Modules
+- Multi Modules
   - app
   - domain
   - data

@@ -3,6 +3,7 @@ package dev.yjyoon.kwnotice.presentation.ui.favorite
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yjyoon.kwnotice.domain.model.Favorite
+import dev.yjyoon.kwnotice.domain.usecase.favorite.AddFavoriteUseCase
 import dev.yjyoon.kwnotice.domain.usecase.favorite.DeleteFavoriteUseCase
 import dev.yjyoon.kwnotice.domain.usecase.favorite.GetAllFavoriteListUseCase
 import dev.yjyoon.kwnotice.presentation.ui.base.BaseViewModel
@@ -18,15 +19,20 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     getAllFavoriteListUseCase: GetAllFavoriteListUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
     private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : BaseViewModel() {
 
     val uiState = getAllFavoriteListUseCase().map {
-        FavoriteUiState.Success(
-            favorites = it,
-            types = it.map { favorite -> favorite.type }.distinct(),
-            months = it.map { favorite -> favorite.date.monthValue }.distinct()
-        )
+        if (it.isNotEmpty()) {
+            FavoriteUiState.Success(
+                favorites = it,
+                types = it.map { favorite -> favorite.type }.distinct(),
+                months = it.map { favorite -> favorite.date.monthValue }.distinct()
+            )
+        } else {
+            FavoriteUiState.Empty
+        }
     }
         .stateIn(
             viewModelScope,
@@ -37,6 +43,11 @@ class FavoriteViewModel @Inject constructor(
     private val _filterState = MutableStateFlow(FavoriteFilterState.Unspecified)
     val filterState: StateFlow<FavoriteFilterState> = _filterState.asStateFlow()
 
+    fun addToFavorite(favorite: Favorite) {
+        launch {
+            addFavoriteUseCase(favorite).getOrThrow()
+        }
+    }
 
     fun deleteFromFavorite(favorite: Favorite) {
         launch {

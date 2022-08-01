@@ -33,7 +33,8 @@ import java.time.format.DateTimeFormatter
 fun FavoriteCard(
     favorite: Favorite,
     onClickFavorite: (String) -> Unit,
-    onUnbookmark: (Favorite) -> Unit
+    onUnbookmark: (Favorite) -> Unit,
+    showUndoSnackbar: (Favorite) -> Unit
 ) {
     ElevatedCard(
         onClick = { onClickFavorite(favorite.url) },
@@ -61,7 +62,12 @@ fun FavoriteCard(
             }
             FilledIconToggleButton(
                 checked = true,
-                onCheckedChange = { onUnbookmark(favorite) },
+                onCheckedChange = {
+                    favorite.let {
+                        onUnbookmark(it)
+                        showUndoSnackbar(it)
+                    }
+                },
                 modifier = Modifier.padding(end = 12.dp)
             ) {
                 Icon(
