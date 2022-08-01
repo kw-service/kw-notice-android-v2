@@ -6,15 +6,28 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,6 +40,8 @@ import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeLoading
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeSearchTopAppBar
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 @Composable
 fun FavoriteScreen(
@@ -44,7 +59,8 @@ fun FavoriteScreen(
         onUnbookmark = viewModel::deleteFromFavorite,
         onTypeFilterChange = viewModel::setTypeFilter,
         onMonthFilterChange = viewModel::setMonthFilter,
-        onInitFilter = viewModel::initFilter
+        onInitFilter = viewModel::initFilter,
+        addToFavorite = viewModel::addToFavorite
     )
 }
 
@@ -57,45 +73,98 @@ fun FavoriteScreen(
     onUnbookmark: (Favorite) -> Unit,
     onTypeFilterChange: (String?) -> Unit,
     onMonthFilterChange: (String?) -> Unit,
-    onInitFilter: () -> Unit
+    onInitFilter: () -> Unit,
+    addToFavorite: (Favorite) -> Unit
 ) {
-    Column(
-        Modifier.fillMaxSize()
-    ) {
-        KwNoticeSearchTopAppBar(
-            titleText = stringResource(id = R.string.navigation_favorite),
-            onSearch = onSearch,
-            onCloseSearh = onInitFilter
-        )
-        Box(
-            Modifier.weight(1f)
+    val scope = rememberCoroutineScope()
+    var job: Job? by remember { mutableStateOf(null) }
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    val showUndoSnackbar: (Favorite) -> Unit = { favorite ->
+        job?.cancel()
+        job = scope.launch {
+            val snackbarResult = snackbarHostState.showSnackbar(
+                message = "즐겨찾기에서 삭제했습니다",
+                actionLabel = "되돌리기"
+            )
+            when (snackbarResult) {
+                SnackbarResult.ActionPerformed -> {
+                    addToFavorite(favorite)
+                }
+                SnackbarResult.Dismissed -> {}
+            }
+        }
+    }
+
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState) { data ->
+                FavoriteSnackbar(data)
+            }
+        }
+    ) { innerPadding ->
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
         ) {
-            when (uiState) {
-                is FavoriteUiState.Success -> {
-                    FavoriteContent(
-                        uiState = uiState,
-                        filterState = filterState,
-                        onClickFavorite = onClickFavorite,
-                        onUnbookmark = onUnbookmark,
-                        onTypeFilterChange = onTypeFilterChange,
-                        onMonthFilterChange = onMonthFilterChange
-                    )
-                }
-                FavoriteUiState.Empty -> {
-                    FavoriteEmpty(
-                        Modifier
-                            .align(Alignment.Center)
-                            .fillMaxWidth()
-                    )
-                }
-                FavoriteUiState.Loading -> {
-                    KwNoticeLoading()
-                }
-                FavoriteUiState.Failure -> {
-                    // no-op
+            KwNoticeSearchTopAppBar(
+                titleText = stringResource(id = R.string.navigation_favorite),
+                onSearch = onSearch,
+                onCloseSearh = onInitFilter
+            )
+            Box(
+                Modifier.weight(1f)
+            ) {
+                when (uiState) {
+                    is FavoriteUiState.Success -> {
+                        FavoriteContent(
+                            uiState = uiState,
+                            filterState = filterState,
+                            onClickFavorite = onClickFavorite,
+                            onUnbookmark = onUnbookmark,
+                            onTypeFilterChange = onTypeFilterChange,
+                            onMonthFilterChange = onMonthFilterChange,
+                            showUndoSnackbar = showUndoSnackbar
+                        )
+                    }
+                    FavoriteUiState.Empty -> {
+                        FavoriteEmpty(
+                            Modifier
+                                .align(Alignment.Center)
+                                .fillMaxWidth()
+                        )
+                    }
+                    FavoriteUiState.Loading -> {
+                        KwNoticeLoading()
+                    }
+                    FavoriteUiState.Failure -> {
+                        // no-op
+                    }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun FavoriteSnackbar(data: SnackbarData) {
+    Snackbar(
+        Modifier.padding(18.dp),
+        action = {
+            data.visuals.actionLabel?.let {
+                TextButton(
+                    onClick = { data.performAction() },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.inversePrimary
+                    )
+                ) {
+                    Text(it)
+                }
+            }
+        }
+    ) {
+        Text(data.visuals.message)
     }
 }
 
@@ -132,7 +201,8 @@ private fun FavoriteScreenPreview() {
             onMonthFilterChange = {},
             onTypeFilterChange = {},
             onUnbookmark = {},
-            onClickFavorite = {}
+            onClickFavorite = {},
+            addToFavorite = {}
         )
     }
 }
