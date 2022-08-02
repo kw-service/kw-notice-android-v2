@@ -30,6 +30,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -76,6 +77,7 @@ fun FavoriteScreen(
     onInitFilter: () -> Unit,
     addToFavorite: (Favorite) -> Unit
 ) {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var job: Job? by remember { mutableStateOf(null) }
     val snackbarHostState = remember { SnackbarHostState() }
@@ -84,8 +86,8 @@ fun FavoriteScreen(
         job?.cancel()
         job = scope.launch {
             val snackbarResult = snackbarHostState.showSnackbar(
-                message = "즐겨찾기에서 삭제했습니다",
-                actionLabel = "되돌리기"
+                message = context.getString(R.string.unbookmarked),
+                actionLabel = context.getString(R.string.undo)
             )
             when (snackbarResult) {
                 SnackbarResult.ActionPerformed -> {
