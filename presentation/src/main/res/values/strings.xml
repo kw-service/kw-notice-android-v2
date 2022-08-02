@@ -20,6 +20,9 @@
     <string name="filter_type_all">전체</string>
     <string name="filter_month_all">전체 날짜</string>
     <string name="month">월</string>
+    
+    <string name="unbookmarked">즐겨찾기에서 삭제하였습니다</string>
+    <string name="undo">되돌리기</string>
 
     <string name="open_in_browser">웹으로 열기</string>
 
