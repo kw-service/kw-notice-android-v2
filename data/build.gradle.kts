@@ -18,6 +18,7 @@ android {
         minSdk = 24
 
         buildConfigField("String", "BASE_URL", properties["base_url"] as String)
+        buildConfigField("String", "KW_DORM_NOTICE_URL", properties["kw_dorm_notice_url"] as String)
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

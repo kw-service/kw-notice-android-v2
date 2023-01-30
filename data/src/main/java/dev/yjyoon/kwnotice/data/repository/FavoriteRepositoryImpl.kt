@@ -29,6 +29,10 @@ internal class FavoriteRepositoryImpl @Inject constructor(
         favoriteDao.getSwCentralIds()
     }
 
+    override suspend fun getFavoriteKwDormIds(): Result<List<Long>> = runCatching {
+        favoriteDao.getKwDormIds()
+    }
+
     override fun getAllFavoritesStream(): Flow<List<Favorite>> =
         favoriteDao.getAll().map { favorites -> favorites.map { it.toDomain() } }
 }
