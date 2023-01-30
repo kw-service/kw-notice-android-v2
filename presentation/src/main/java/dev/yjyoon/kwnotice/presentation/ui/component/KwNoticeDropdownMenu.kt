@@ -50,13 +50,6 @@ fun KwNoticeDropdownMenu(
                     contentDescription = null,
                     modifier = Modifier.size(12.dp)
                 )
-            },
-            selectedIcon = {
-                Icon(
-                    painter = painterResource(id = leadingIconRes),
-                    contentDescription = null,
-                    modifier = Modifier.size(12.dp)
-                )
             }
         )
         DropdownMenu(
