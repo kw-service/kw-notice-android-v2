@@ -144,6 +144,24 @@ fun SettingsContent(
         KwNoticeDivider()
         SettingsTitle(
             Modifier.padding(horizontal = 16.dp),
+            text = stringResource(id = R.string.kw_dorm)
+        )
+        Spacer(Modifier.height(4.dp))
+        FcmTopicSwitchBar(
+            uiState = uiState,
+            fcmTopicModel = FcmTopicModel(FcmTopic.KwDormCommon),
+            onSubscribe = onSubscribe,
+            onUnsubscribe = onUnsubscribe
+        )
+        FcmTopicSwitchBar(
+            uiState = uiState,
+            fcmTopicModel = FcmTopicModel(FcmTopic.KwDormRecruitment),
+            onSubscribe = onSubscribe,
+            onUnsubscribe = onUnsubscribe
+        )
+        KwNoticeDivider()
+        SettingsTitle(
+            Modifier.padding(horizontal = 16.dp),
             text = stringResource(id = R.string.settings_app_info)
         )
         Spacer(Modifier.height(4.dp))
