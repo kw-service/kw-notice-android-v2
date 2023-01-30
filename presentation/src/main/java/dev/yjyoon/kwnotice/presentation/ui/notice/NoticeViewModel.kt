@@ -7,6 +7,7 @@ import dev.yjyoon.kwnotice.domain.model.toFavorite
 import dev.yjyoon.kwnotice.domain.usecase.favorite.AddFavoriteUseCase
 import dev.yjyoon.kwnotice.domain.usecase.favorite.DeleteFavoriteUseCase
 import dev.yjyoon.kwnotice.domain.usecase.favorite.GetAllFavoriteListUseCase
+import dev.yjyoon.kwnotice.domain.usecase.notice.GetKwDormNoticeListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.notice.GetKwHomeNoticeListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.notice.GetSwCentralNoticeListUseCase
 import dev.yjyoon.kwnotice.presentation.ui.base.BaseViewModel
@@ -25,6 +26,7 @@ class NoticeViewModel @Inject constructor(
     getAllFavoriteListUseCase: GetAllFavoriteListUseCase,
     private val getKwHomeNoticeListUseCase: GetKwHomeNoticeListUseCase,
     private val getSwCentralNoticeListUseCase: GetSwCentralNoticeListUseCase,
+    private val getKwDormNoticeListUseCase: GetKwDormNoticeListUseCase,
     private val addFavoriteUseCase: AddFavoriteUseCase,
     private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : BaseViewModel() {
@@ -40,8 +42,13 @@ class NoticeViewModel @Inject constructor(
                 .onSuccess { emit(it) }
                 .onFailure { emit(null) }
         },
+        flow {
+            getKwDormNoticeListUseCase()
+                .onSuccess { emit(it) }
+                .onFailure { emit(null) }
+        },
         getAllFavoriteListUseCase()
-    ) { kwHomeNotices, swCentralNotices, favoriteNotices ->
+    ) { kwHomeNotices, swCentralNotices, kwDormNotices, favoriteNotices ->
         NoticeUiState(
             kwHomeNoticeUiState = if (kwHomeNotices != null) {
                 KwHomeNoticeUiState.Success(
@@ -60,6 +67,14 @@ class NoticeViewModel @Inject constructor(
                 )
             } else {
                 SwCentralNoticeUiState.Failure
+            },
+            kwDormNoticeUiState = if (kwDormNotices != null) {
+                KwDormNoticeUiState.Success(
+                    notices = kwDormNotices,
+                    months = kwDormNotices.map { it.postedDate.monthValue }.distinct()
+                )
+            } else {
+                KwDormNoticeUiState.Failure
             },
             favoriteNotices = favoriteNotices
         )

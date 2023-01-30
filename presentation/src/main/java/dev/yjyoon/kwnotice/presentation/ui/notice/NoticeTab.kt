@@ -7,5 +7,6 @@ enum class NoticeTab(
     @StringRes val textRes: Int
 ) {
     KwHome(textRes = R.string.kw_home),
-    SwCentral(textRes = R.string.sw_central)
+    SwCentral(textRes = R.string.sw_central),
+    KwDorm(textRes = R.string.kw_dorm)
 }
