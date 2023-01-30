@@ -46,9 +46,9 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":presentation"))
 
-    implementation(platform(libs.google.firebase.bom))
-    implementation(libs.google.firebase.messaging)
-    implementation(libs.google.firebase.analytics)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

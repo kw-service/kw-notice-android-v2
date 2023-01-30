@@ -34,12 +34,12 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    annotationProcessor(libs.androidx.room.compiler)
-    kapt(libs.androidx.room.compiler)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    annotationProcessor(libs.room.compiler)
+    kapt(libs.room.compiler)
 
-    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.datastore.preferences)
 
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.converter.gson)
