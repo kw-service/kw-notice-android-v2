@@ -89,7 +89,7 @@ fun NoticeTitle(notice: Notice) {
         is Notice.KwHome -> {
             notice.title.substring(notice.tag.length + 3)
         }
-        is Notice.SwCentral -> {
+        else -> {
             notice.title
         }
     }
@@ -109,7 +109,7 @@ fun NoticeDateBadge(notice: Notice) {
         is Notice.KwHome -> {
             notice.modifiedDate
         }
-        is Notice.SwCentral -> {
+        else -> {
             notice.postedDate
         }
     }

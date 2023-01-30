@@ -10,5 +10,7 @@ data class FcmTopicModel(val topic: FcmTopic) {
         FcmTopic.KwHomeNew -> R.string.settings_notification_new
         FcmTopic.KwHomeEdit -> R.string.settings_notification_edit
         FcmTopic.SwCentralNew -> R.string.settings_notification_new
+        FcmTopic.KwDormCommon -> R.string.settings_notification_common
+        FcmTopic.KwDormRecruitment -> R.string.settings_notification_recruit
     }
 }
