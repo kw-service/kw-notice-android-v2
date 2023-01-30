@@ -12,11 +12,10 @@ properties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "dev.yjyoon.kwnotice.data"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 32
 
         buildConfigField("String", "BASE_URL", properties["base_url"] as String)
     }
@@ -34,12 +33,12 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    annotationProcessor(libs.androidx.room.compiler)
-    kapt(libs.androidx.room.compiler)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    annotationProcessor(libs.room.compiler)
+    kapt(libs.room.compiler)
 
-    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.datastore.preferences)
 
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.converter.gson)
