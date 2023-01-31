@@ -12,7 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 internal class FcmSubscriptionImpl @Inject constructor() : FcmSubscription {
 
     override suspend fun subscribeTo(topic: FcmTopic): Result<Unit> = runCatching {
-        suspendCoroutine<Unit> { continuation ->
+        suspendCoroutine { continuation ->
             FirebaseMessaging.getInstance().subscribeToTopic(topic.value)
                 .addOnCompleteListener {
                     Log.d("fcm", "Subscribed to ${topic.value} successfully")
@@ -26,7 +26,7 @@ internal class FcmSubscriptionImpl @Inject constructor() : FcmSubscription {
     }
 
     override suspend fun unsubscribeFrom(topic: FcmTopic): Result<Unit> = runCatching {
-        suspendCoroutine<Unit> { continuation ->
+        suspendCoroutine { continuation ->
             FirebaseMessaging.getInstance().unsubscribeFromTopic(topic.value)
                 .addOnCompleteListener {
                     Log.d("fcm", "Unsubscribed from ${topic.value} successfully")
