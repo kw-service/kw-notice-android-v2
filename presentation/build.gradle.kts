@@ -55,4 +55,6 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     coreLibraryDesugaring(libs.android.desugar)
+
+    debugImplementation(libs.compose.ui.tooling)
 }
