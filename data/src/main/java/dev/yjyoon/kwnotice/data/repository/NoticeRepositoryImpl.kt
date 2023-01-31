@@ -4,6 +4,7 @@ import dev.yjyoon.kwnotice.data.remote.api.NoticeService
 import dev.yjyoon.kwnotice.data.remote.model.toDomain
 import dev.yjyoon.kwnotice.domain.model.Notice
 import dev.yjyoon.kwnotice.domain.repository.NoticeRepository
+import java.time.LocalDate
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -21,6 +22,13 @@ internal class NoticeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getKwDormNotices(): Result<List<Notice.KwDorm>> = runCatching {
-        noticeService.getKwDormNotices(kwDormNoticeUrl).map { it.toDomain() }
+        noticeService.getKwDormNotices(kwDormNoticeUrl)
+            .filter {
+                LocalDate.parse(it.postedDate)
+                    .plusMonths(4)
+                    .isAfter(LocalDate.now())
+            }
+            .reversed()
+            .map { it.toDomain() }
     }
 }
