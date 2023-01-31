@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.AlertDialog
@@ -33,8 +35,8 @@ import dev.yjyoon.kwnotice.domain.model.VersionName
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeDivider
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeLoading
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeSimpleTopAppBar
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeSwitchBar
-import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTopAppBar
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeTouchBar
 import dev.yjyoon.kwnotice.presentation.ui.model.FcmTopicModel
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
@@ -103,11 +105,14 @@ fun SettingsContent(
     versionName: VersionName
 ) {
     val uriHandler = LocalUriHandler.current
+    val scrollState = rememberScrollState()
 
     Column(
-        Modifier.fillMaxSize()
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
     ) {
-        KwNoticeTopAppBar(
+        KwNoticeSimpleTopAppBar(
             titleText = stringResource(id = R.string.navigation_settings),
             actionIcon = Icons.Outlined.Info,
             onActionClick = onOpenDialog

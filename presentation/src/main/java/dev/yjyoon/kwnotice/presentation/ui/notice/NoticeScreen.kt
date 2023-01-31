@@ -78,7 +78,7 @@ fun NoticeScreen(
             KwNoticeSearchTopAppBar(
                 titleText = stringResource(id = R.string.navigation_notice),
                 onSearch = onSearch,
-                onCloseSearh = onInitFilter
+                onCloseSearch = onInitFilter
             )
             TabRow(
                 selectedTabIndex = pagerState.currentPage,

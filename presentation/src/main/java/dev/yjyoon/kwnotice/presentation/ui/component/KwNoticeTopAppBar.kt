@@ -7,35 +7,71 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.with
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import dev.yjyoon.kwnotice.presentation.R
-import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
+import androidx.compose.ui.unit.dp
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTypography
+
 
 @Composable
 fun KwNoticeTopAppBar(
+    title: @Composable() (RowScope.() -> Unit),
+    actions: @Composable() (RowScope.() -> Unit)
+) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp, bottom = 0.dp, start = 4.dp, end = 4.dp),
+            horizontalArrangement = Arrangement.End,
+            content = actions
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 0.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            content = title
+        )
+    }
+}
+
+@Composable
+fun KwNoticeSimpleTopAppBar(
     titleText: String,
     actionIcon: ImageVector,
     onActionClick: () -> Unit
 ) {
-    SmallTopAppBar(
-        title = { Text(text = titleText, style = KwNoticeTypography.titleLarge) },
+    KwNoticeTopAppBar(
+        title = {
+            Text(
+                modifier = Modifier.padding(vertical = 8.dp),
+                text = titleText,
+                style = KwNoticeTypography.titleLarge,
+                maxLines = 1
+            )
+        },
         actions = {
             IconButton(onClick = onActionClick) {
                 Icon(imageVector = actionIcon, contentDescription = null)
@@ -48,19 +84,19 @@ fun KwNoticeTopAppBar(
 fun KwNoticeSearchTopAppBar(
     titleText: String,
     onSearch: (String) -> Unit,
-    onCloseSearh: () -> Unit
+    onCloseSearch: () -> Unit
 ) {
     var showSearchBar by remember { mutableStateOf(false) }
 
-    SmallTopAppBar(
+    KwNoticeTopAppBar(
         title = {
             Text(
+                modifier = Modifier.padding(vertical = 8.dp),
                 text = titleText,
                 style = KwNoticeTypography.titleLarge,
                 maxLines = 1
             )
-        },
-        actions = {
+            Spacer(modifier = Modifier.width(16.dp))
             AnimatedContent(
                 targetState = showSearchBar,
                 transitionSpec = {
@@ -78,30 +114,22 @@ fun KwNoticeSearchTopAppBar(
                         Modifier.fillMaxWidth(),
                         onSearch = onSearch,
                         onClose = {
-                            onCloseSearh()
+                            onCloseSearch()
                             showSearchBar = false
                         }
                     )
-                } else {
-                    IconButton(onClick = {
-                        showSearchBar = true
-                    }) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = null)
-                    }
                 }
+            }
+        },
+        actions = {
+            IconButton(
+                onClick = { showSearchBar = !showSearchBar }
+            ) {
+                Icon(
+                    imageVector = if (showSearchBar) Icons.Default.Close else Icons.Default.Search,
+                    contentDescription = null
+                )
             }
         }
     )
-}
-
-@Preview
-@Composable
-private fun KwNoticeTopAppBarPreview() {
-    KwNoticeTheme {
-        KwNoticeTopAppBar(
-            titleText = stringResource(id = R.string.navigation_notice),
-            actionIcon = Icons.Outlined.Search,
-            onActionClick = {}
-        )
-    }
 }

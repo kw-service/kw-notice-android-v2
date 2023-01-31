@@ -113,7 +113,7 @@ fun FavoriteScreen(
             KwNoticeSearchTopAppBar(
                 titleText = stringResource(id = R.string.navigation_favorite),
                 onSearch = onSearch,
-                onCloseSearh = onInitFilter
+                onCloseSearch = onInitFilter
             )
             Box(
                 Modifier.weight(1f)
