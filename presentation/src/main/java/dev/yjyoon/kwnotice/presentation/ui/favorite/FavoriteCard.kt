@@ -104,6 +104,8 @@ fun NoticeTypeBadge(type: Favorite.Type) {
     @StringRes val typeStringRes = when (type) {
         Favorite.Type.KwHome -> R.string.kw_home
         Favorite.Type.SwCentral -> R.string.sw_central
+        Favorite.Type.KwDorm -> R.string.kw_dorm
+        else -> R.string.unknown
     }
 
     KwNoticeBadge(leadingIconRes = R.drawable.ic_tag, label = stringResource(id = typeStringRes))

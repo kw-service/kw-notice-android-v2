@@ -25,6 +25,13 @@ sealed class Notice {
         override val url: String,
         override val postedDate: LocalDate,
     ) : Notice()
+
+    data class KwDorm(
+        override val id: Long,
+        override val title: String,
+        override val url: String,
+        override val postedDate: LocalDate,
+    ) : Notice()
 }
 
 fun Notice.toFavorite() = when (this) {
@@ -41,5 +48,12 @@ fun Notice.toFavorite() = when (this) {
         url = url,
         date = postedDate,
         type = Favorite.Type.SwCentral
+    )
+    is Notice.KwDorm -> Favorite(
+        id = id,
+        title = title,
+        url = url,
+        date = postedDate,
+        type = Favorite.Type.KwDorm
     )
 }

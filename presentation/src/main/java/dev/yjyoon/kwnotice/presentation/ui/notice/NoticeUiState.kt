@@ -6,6 +6,7 @@ import dev.yjyoon.kwnotice.domain.model.Notice
 data class NoticeUiState(
     val kwHomeNoticeUiState: KwHomeNoticeUiState,
     val swCentralNoticeUiState: SwCentralNoticeUiState,
+    val kwDormNoticeUiState: KwDormNoticeUiState,
     val favoriteNotices: List<Favorite>
 ) {
 
@@ -13,6 +14,7 @@ data class NoticeUiState(
         val Loading = NoticeUiState(
             kwHomeNoticeUiState = KwHomeNoticeUiState.Loading,
             swCentralNoticeUiState = SwCentralNoticeUiState.Loading,
+            kwDormNoticeUiState = KwDormNoticeUiState.Loading,
             favoriteNotices = emptyList()
         )
     }
@@ -38,4 +40,14 @@ sealed interface SwCentralNoticeUiState {
 
     object Loading : SwCentralNoticeUiState
     object Failure : SwCentralNoticeUiState
+}
+
+sealed interface KwDormNoticeUiState {
+    data class Success(
+        val notices: List<Notice.KwDorm>,
+        val months: List<Int>
+    ) : KwDormNoticeUiState
+
+    object Loading : KwDormNoticeUiState
+    object Failure : KwDormNoticeUiState
 }

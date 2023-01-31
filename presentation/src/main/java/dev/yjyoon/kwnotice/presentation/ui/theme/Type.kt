@@ -98,7 +98,7 @@ val KwNoticeTypography = Typography(
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.sp,
         lineHeight = 28.sp,
-        fontSize = 22.sp
+        fontSize = 26.sp
     ),
     titleMedium = TextStyle(
         fontFamily = Roboto,

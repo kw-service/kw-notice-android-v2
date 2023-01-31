@@ -3,6 +3,7 @@ package dev.yjyoon.kwnotice.presentation.ui.favorite
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yjyoon.kwnotice.domain.model.Favorite
+import dev.yjyoon.kwnotice.domain.model.toFavoriteType
 import dev.yjyoon.kwnotice.domain.usecase.favorite.AddFavoriteUseCase
 import dev.yjyoon.kwnotice.domain.usecase.favorite.DeleteFavoriteUseCase
 import dev.yjyoon.kwnotice.domain.usecase.favorite.GetAllFavoriteListUseCase
@@ -63,7 +64,7 @@ class FavoriteViewModel @Inject constructor(
 
     fun setTypeFilter(type: String?) {
         _filterState.update {
-            it.copy(type = type?.let { type -> Favorite.Companion.stringToType(type) })
+            it.copy(type = type?.toFavoriteType())
         }
     }
 

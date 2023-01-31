@@ -16,7 +16,7 @@ data class NoticeFilterState(
                 .and(department == null || department == notice.department)
                 .and(month == null || month.dropLast(1).toInt() == notice.modifiedDate.monthValue)
         }
-        is Notice.SwCentral -> {
+        else -> {
             (title == null || title in notice.title)
                 .and(month == null || month.dropLast(1).toInt() == notice.postedDate.monthValue)
         }

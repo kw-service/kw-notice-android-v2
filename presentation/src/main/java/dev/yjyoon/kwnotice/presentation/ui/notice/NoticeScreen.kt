@@ -78,7 +78,7 @@ fun NoticeScreen(
             KwNoticeSearchTopAppBar(
                 titleText = stringResource(id = R.string.navigation_notice),
                 onSearch = onSearch,
-                onCloseSearh = onInitFilter
+                onCloseSearch = onInitFilter
             )
             TabRow(
                 selectedTabIndex = pagerState.currentPage,
@@ -125,6 +125,17 @@ fun NoticeScreen(
                             onMonthFilterChange = onMonthFilterChange
                         )
                     }
+                    NoticeTab.KwDorm.ordinal -> {
+                        KwDormContent(
+                            uiState = uiState.kwDormNoticeUiState,
+                            onClickNotice = onClickNotice,
+                            onAddToFavorite = onAddToFavorite,
+                            onDeleteFromFavorite = onDeleteFromFavorite,
+                            favoriteNotices = favoriteNotices,
+                            filterState = filterState,
+                            onMonthFilterChange = onMonthFilterChange
+                        )
+                    }
                 }
             }
         }
@@ -154,6 +165,7 @@ private fun NoticeScreenPreview() {
                     months = listOf(1)
                 ),
                 swCentralNoticeUiState = SwCentralNoticeUiState.Failure,
+                kwDormNoticeUiState = KwDormNoticeUiState.Failure,
                 favoriteNotices = emptyList()
             ),
             filterState = NoticeFilterState.Unspecified,

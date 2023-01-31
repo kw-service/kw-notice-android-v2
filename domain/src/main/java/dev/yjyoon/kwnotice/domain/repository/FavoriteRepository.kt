@@ -13,5 +13,7 @@ interface FavoriteRepository {
 
     suspend fun getFavoriteSwCentralIds(): Result<List<Long>>
 
+    suspend fun getFavoriteKwDormIds(): Result<List<Long>>
+
     fun getAllFavoritesStream(): Flow<List<Favorite>>
 }
