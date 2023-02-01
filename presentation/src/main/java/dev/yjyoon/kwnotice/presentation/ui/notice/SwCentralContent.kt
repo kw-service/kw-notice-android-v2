@@ -88,7 +88,7 @@ fun SwCentralContent(
             CircularProgressIndicator()
         }
         SwCentralNoticeUiState.Failure -> {
-            FailureScreen()
+            FailureScreen(onRefresh = onRefresh)
         }
     }
 }

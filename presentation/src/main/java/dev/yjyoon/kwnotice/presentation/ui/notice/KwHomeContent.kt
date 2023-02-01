@@ -88,7 +88,7 @@ fun KwHomeContent(
             CircularProgressIndicator()
         }
         KwHomeNoticeUiState.Failure -> {
-            FailureScreen()
+            FailureScreen(onRefresh = onRefresh)
         }
     }
 }
