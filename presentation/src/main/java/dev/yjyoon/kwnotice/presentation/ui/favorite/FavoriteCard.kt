@@ -26,6 +26,7 @@ import dev.yjyoon.kwnotice.domain.model.Favorite
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeBadge
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeRoundRect
+import dev.yjyoon.kwnotice.presentation.ui.util.DateDisplayUtil.toRelativeDateString
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -95,7 +96,7 @@ fun NoticeTitle(title: String) {
 fun NoticeDateBadge(date: LocalDate) {
     KwNoticeBadge(
         leadingIconRes = R.drawable.ic_calendar,
-        label = date.format(DateTimeFormatter.ofPattern(stringResource(id = R.string.notice_date_format)))
+        label = date.toRelativeDateString()
     )
 }
 
