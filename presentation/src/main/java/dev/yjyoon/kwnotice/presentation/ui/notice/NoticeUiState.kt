@@ -4,10 +4,10 @@ import dev.yjyoon.kwnotice.domain.model.Favorite
 import dev.yjyoon.kwnotice.domain.model.Notice
 
 data class NoticeUiState(
-    val kwHomeNoticeUiState: KwHomeNoticeUiState,
-    val swCentralNoticeUiState: SwCentralNoticeUiState,
-    val kwDormNoticeUiState: KwDormNoticeUiState,
-    val favoriteNotices: List<Favorite>
+    var kwHomeNoticeUiState: KwHomeNoticeUiState,
+    var swCentralNoticeUiState: SwCentralNoticeUiState,
+    var kwDormNoticeUiState: KwDormNoticeUiState,
+    var favoriteNotices: List<Favorite>
 ) {
 
     companion object {

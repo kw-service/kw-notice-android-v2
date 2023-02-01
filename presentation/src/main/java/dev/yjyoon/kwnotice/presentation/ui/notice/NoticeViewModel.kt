@@ -1,5 +1,8 @@
 package dev.yjyoon.kwnotice.presentation.ui.notice
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yjyoon.kwnotice.domain.model.Notice
@@ -11,6 +14,7 @@ import dev.yjyoon.kwnotice.domain.usecase.notice.GetKwDormNoticeListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.notice.GetKwHomeNoticeListUseCase
 import dev.yjyoon.kwnotice.domain.usecase.notice.GetSwCentralNoticeListUseCase
 import dev.yjyoon.kwnotice.presentation.ui.base.BaseViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +23,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +36,7 @@ class NoticeViewModel @Inject constructor(
     private val deleteFavoriteUseCase: DeleteFavoriteUseCase
 ) : BaseViewModel() {
 
-    val uiState: StateFlow<NoticeUiState> = combine(
+    var uiState: StateFlow<NoticeUiState> = combine(
         flow {
             getKwHomeNoticeListUseCase()
                 .onSuccess { emit(it) }
@@ -83,6 +88,8 @@ class NoticeViewModel @Inject constructor(
     private val _filterState = MutableStateFlow(NoticeFilterState.Unspecified)
     val filterState: StateFlow<NoticeFilterState> = _filterState.asStateFlow()
 
+    var refreshing by mutableStateOf(false)
+
     fun addFavorite(notice: Notice) {
         launch {
             addFavoriteUseCase(notice.toFavorite()).getOrThrow()
@@ -121,5 +128,58 @@ class NoticeViewModel @Inject constructor(
 
     fun initFilter() {
         _filterState.value = NoticeFilterState.Unspecified
+    }
+
+    fun refresh(tab: NoticeTab) {
+        when (tab) {
+            NoticeTab.KwHome -> {
+                viewModelScope.launch {
+                    refreshing = true
+                    getKwHomeNoticeListUseCase()
+                        .onSuccess { kwHomeNotices ->
+                            uiState.value.kwHomeNoticeUiState = KwHomeNoticeUiState.Success(
+                                notices = kwHomeNotices,
+                                tags = kwHomeNotices.map { it.tag }.distinct(),
+                                departments = kwHomeNotices.map { it.department }.distinct(),
+                                months = kwHomeNotices.map { it.modifiedDate.monthValue }.distinct()
+                            )
+                        }
+                    delay(250L)
+                    refreshing = false
+                }
+            }
+            NoticeTab.SwCentral -> {
+                viewModelScope.launch {
+                    refreshing = true
+                    getSwCentralNoticeListUseCase()
+                        .onSuccess { swCentralNotices ->
+                            uiState.value.swCentralNoticeUiState = SwCentralNoticeUiState.Success(
+                                notices = swCentralNotices,
+                                months = swCentralNotices
+                                    .map { it.postedDate.monthValue }
+                                    .distinct()
+                            )
+                        }
+                    delay(250L)
+                    refreshing = false
+                }
+            }
+            NoticeTab.KwDorm -> {
+                viewModelScope.launch {
+                    refreshing = true
+                    getKwDormNoticeListUseCase()
+                        .onSuccess { kwDormNotices ->
+                            uiState.value.kwDormNoticeUiState = KwDormNoticeUiState.Success(
+                                notices = kwDormNotices,
+                                months = kwDormNotices
+                                    .map { it.postedDate.monthValue }
+                                    .distinct()
+                            )
+                        }
+                    delay(250L)
+                    refreshing = false
+                }
+            }
+        }
     }
 }

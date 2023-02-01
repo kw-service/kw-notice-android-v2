@@ -30,7 +30,8 @@ android {
     }
     kotlinOptions {
         freeCompilerArgs += listOf(
-            "-Xopt-in=kotlin.RequiresOptIn",
+            "-X opt-in=kotlin.RequiresOptIn",
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
         )
@@ -55,4 +56,6 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     coreLibraryDesugaring(libs.android.desugar)
+
+    debugImplementation(libs.compose.ui.tooling)
 }
