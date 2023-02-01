@@ -144,6 +144,9 @@ class NoticeViewModel @Inject constructor(
                                 months = kwHomeNotices.map { it.modifiedDate.monthValue }.distinct()
                             )
                         }
+                        .onFailure {
+                            uiState.value.kwHomeNoticeUiState = KwHomeNoticeUiState.Failure
+                        }
                     delay(250L)
                     refreshing = false
                 }
@@ -160,6 +163,9 @@ class NoticeViewModel @Inject constructor(
                                     .distinct()
                             )
                         }
+                        .onFailure {
+                            uiState.value.swCentralNoticeUiState = SwCentralNoticeUiState.Failure
+                        }
                     delay(250L)
                     refreshing = false
                 }
@@ -175,6 +181,9 @@ class NoticeViewModel @Inject constructor(
                                     .map { it.postedDate.monthValue }
                                     .distinct()
                             )
+                        }
+                        .onFailure {
+                            uiState.value.kwDormNoticeUiState = KwDormNoticeUiState.Failure
                         }
                     delay(250L)
                     refreshing = false
