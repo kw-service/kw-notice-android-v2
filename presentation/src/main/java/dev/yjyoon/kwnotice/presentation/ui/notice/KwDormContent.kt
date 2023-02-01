@@ -88,7 +88,7 @@ fun KwDormContent(
             CircularProgressIndicator()
         }
         KwDormNoticeUiState.Failure -> {
-            FailureScreen()
+            FailureScreen(onRefresh = onRefresh)
         }
     }
 }
