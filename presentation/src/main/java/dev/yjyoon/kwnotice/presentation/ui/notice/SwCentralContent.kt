@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -48,6 +50,20 @@ fun SwCentralContent(
                         .padding(horizontal = 18.dp, vertical = 8.dp),
                     horizontalArrangement = Arrangement.End
                 ) {
+                    KwNoticeDropdownMenu(
+                        leadingIconRes = R.drawable.ic_tag,
+                        initialItem = stringResource(id = R.string.filter_tag_all),
+                        items = listOf(),
+                        onSelectItem = { }
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    KwNoticeDropdownMenu(
+                        leadingIconRes = R.drawable.ic_group,
+                        initialItem = stringResource(id = R.string.filter_department_all),
+                        items = listOf(),
+                        onSelectItem = { }
+                    )
+                    Spacer(Modifier.weight(1f))
                     KwNoticeDropdownMenu(
                         leadingIconRes = R.drawable.ic_calendar,
                         initialItem = stringResource(id = R.string.filter_month_all),
