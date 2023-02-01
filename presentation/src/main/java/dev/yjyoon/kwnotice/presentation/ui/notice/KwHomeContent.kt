@@ -57,6 +57,7 @@ fun KwHomeContent(
                     )
                     Spacer(Modifier.width(8.dp))
                     KwNoticeDropdownMenu(
+                        modifier = Modifier.padding(end = 8.dp),
                         leadingIconRes = R.drawable.ic_group,
                         initialItem = stringResource(id = R.string.filter_department_all),
                         items = uiState.departments,
