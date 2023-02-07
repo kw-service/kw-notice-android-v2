@@ -12,6 +12,9 @@
     <string name="navigation_favorite">즐겨찾기</string>
     <string name="navigation_settings">환경설정</string>
 
+    <string name="on_deny_notification_permission">공지사항 알림 수신을 위해 알림 권한을 허용해주세요</string>
+    <string name="on_disable_notification">공지사항 알림 수신을 위해 앱 정보에서 알림 권한을 허용해주세요</string>
+
     <string name="notice_network_fail">공지사항을 불러올 수 없습니다.\n네트워크 연결 상태를 확인해주세요!</string>
 
     <string name="favorite_empty">아직 등록된 즐겨찾기가 없습니다.\n공지사항에서 즐겨찾기를 추가해보세요!</string>
