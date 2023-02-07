@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -30,38 +31,38 @@ import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeDropdownMenu
 
 @Composable
-fun KwHomeContent(
-    uiState: KwHomeNoticeUiState,
+fun KwDormContent(
+    uiState: KwDormNoticeUiState,
     filterState: NoticeFilterState,
     favoriteNotices: List<Favorite>,
     refreshing: Boolean,
     onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
     onDeleteFromFavorite: (Notice) -> Unit,
-    onTagFilterChange: (String?) -> Unit,
-    onDepartmentFilterChange: (String?) -> Unit,
     onMonthFilterChange: (String?) -> Unit,
     onRefresh: () -> Unit
 ) {
     when (uiState) {
-        is KwHomeNoticeUiState.Success -> {
+        is KwDormNoticeUiState.Success -> {
             Column(Modifier.fillMaxSize()) {
                 Row(
-                    Modifier.padding(horizontal = 18.dp, vertical = 8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 18.dp, vertical = 8.dp),
+                    horizontalArrangement = Arrangement.End
                 ) {
                     KwNoticeDropdownMenu(
                         leadingIconRes = R.drawable.ic_tag,
                         initialItem = stringResource(id = R.string.filter_tag_all),
-                        items = uiState.tags,
-                        onSelectItem = onTagFilterChange
+                        items = listOf(),
+                        onSelectItem = { }
                     )
                     Spacer(Modifier.width(8.dp))
                     KwNoticeDropdownMenu(
-                        modifier = Modifier.padding(end = 8.dp),
                         leadingIconRes = R.drawable.ic_group,
                         initialItem = stringResource(id = R.string.filter_department_all),
-                        items = uiState.departments,
-                        onSelectItem = onDepartmentFilterChange
+                        items = listOf(),
+                        onSelectItem = { }
                     )
                     Spacer(Modifier.weight(1f))
                     KwNoticeDropdownMenu(
@@ -71,7 +72,7 @@ fun KwHomeContent(
                         onSelectItem = onMonthFilterChange
                     )
                 }
-                KwHomeNoticeColumn(
+                KwDormNoticeColumn(
                     uiState = uiState,
                     filterState = filterState,
                     favoriteNotices = favoriteNotices,
@@ -82,12 +83,11 @@ fun KwHomeContent(
                     onRefresh = onRefresh
                 )
             }
-
         }
-        KwHomeNoticeUiState.Loading -> {
+        KwDormNoticeUiState.Loading -> {
             CircularProgressIndicator()
         }
-        KwHomeNoticeUiState.Failure -> {
+        KwDormNoticeUiState.Failure -> {
             FailureScreen(onRefresh = onRefresh)
         }
     }
@@ -95,8 +95,8 @@ fun KwHomeContent(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun KwHomeNoticeColumn(
-    uiState: KwHomeNoticeUiState.Success,
+fun KwDormNoticeColumn(
+    uiState: KwDormNoticeUiState.Success,
     filterState: NoticeFilterState,
     favoriteNotices: List<Favorite>,
     refreshing: Boolean,
@@ -114,8 +114,9 @@ fun KwHomeNoticeColumn(
         modifier = Modifier.pullRefresh(pullRefreshState)
     ) {
         LazyColumn(
+            Modifier.fillMaxSize(),
             contentPadding = PaddingValues(horizontal = 18.dp, vertical = 0.dp),
-            verticalArrangement = Arrangement.spacedBy(18.dp, Alignment.Top),
+            verticalArrangement = Arrangement.spacedBy(18.dp, Alignment.Top)
         ) {
             items(uiState.notices.filter { filterState.filtering(it) }) {
                 NoticeCard(

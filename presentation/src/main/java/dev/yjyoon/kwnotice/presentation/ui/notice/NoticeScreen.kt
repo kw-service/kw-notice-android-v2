@@ -40,6 +40,7 @@ fun NoticeScreen(
         uiState = uiState,
         filterState = filterState,
         favoriteNotices = uiState.favoriteNotices,
+        refreshing = viewModel.refreshing,
         onClickNotice = onClickNotice,
         onAddToFavorite = viewModel::addFavorite,
         onDeleteFromFavorite = viewModel::deleteFavorite,
@@ -47,7 +48,8 @@ fun NoticeScreen(
         onTagFilterChange = viewModel::setTagFilter,
         onDepartmentFilterChange = viewModel::setDepartmentFilter,
         onMonthFilterChange = viewModel::setMonthFilter,
-        onInitFilter = viewModel::initFilter
+        onInitFilter = viewModel::initFilter,
+        onRefresh = viewModel::refresh
     )
 }
 
@@ -56,6 +58,7 @@ fun NoticeScreen(
 fun NoticeScreen(
     uiState: NoticeUiState,
     filterState: NoticeFilterState,
+    refreshing: Boolean,
     favoriteNotices: List<Favorite>,
     onClickNotice: (String) -> Unit,
     onAddToFavorite: (Notice) -> Unit,
@@ -64,7 +67,8 @@ fun NoticeScreen(
     onTagFilterChange: (String?) -> Unit,
     onDepartmentFilterChange: (String?) -> Unit,
     onMonthFilterChange: (String?) -> Unit,
-    onInitFilter: () -> Unit
+    onInitFilter: () -> Unit,
+    onRefresh: (NoticeTab) -> Unit,
 ) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
@@ -78,7 +82,7 @@ fun NoticeScreen(
             KwNoticeSearchTopAppBar(
                 titleText = stringResource(id = R.string.navigation_notice),
                 onSearch = onSearch,
-                onCloseSearh = onInitFilter
+                onCloseSearch = onInitFilter
             )
             TabRow(
                 selectedTabIndex = pagerState.currentPage,
@@ -111,7 +115,9 @@ fun NoticeScreen(
                             filterState = filterState,
                             onTagFilterChange = onTagFilterChange,
                             onDepartmentFilterChange = onDepartmentFilterChange,
-                            onMonthFilterChange = onMonthFilterChange
+                            onMonthFilterChange = onMonthFilterChange,
+                            refreshing = refreshing,
+                            onRefresh = { onRefresh(NoticeTab.KwHome) }
                         )
                     }
                     NoticeTab.SwCentral.ordinal -> {
@@ -122,7 +128,22 @@ fun NoticeScreen(
                             onDeleteFromFavorite = onDeleteFromFavorite,
                             favoriteNotices = favoriteNotices,
                             filterState = filterState,
-                            onMonthFilterChange = onMonthFilterChange
+                            onMonthFilterChange = onMonthFilterChange,
+                            refreshing = refreshing,
+                            onRefresh = { onRefresh(NoticeTab.SwCentral) }
+                        )
+                    }
+                    NoticeTab.KwDorm.ordinal -> {
+                        KwDormContent(
+                            uiState = uiState.kwDormNoticeUiState,
+                            onClickNotice = onClickNotice,
+                            onAddToFavorite = onAddToFavorite,
+                            onDeleteFromFavorite = onDeleteFromFavorite,
+                            favoriteNotices = favoriteNotices,
+                            filterState = filterState,
+                            onMonthFilterChange = onMonthFilterChange,
+                            refreshing = refreshing,
+                            onRefresh = { onRefresh(NoticeTab.KwDorm) }
                         )
                     }
                 }
@@ -154,10 +175,12 @@ private fun NoticeScreenPreview() {
                     months = listOf(1)
                 ),
                 swCentralNoticeUiState = SwCentralNoticeUiState.Failure,
+                kwDormNoticeUiState = KwDormNoticeUiState.Failure,
                 favoriteNotices = emptyList()
             ),
             filterState = NoticeFilterState.Unspecified,
             favoriteNotices = emptyList(),
+            refreshing = false,
             onClickNotice = {},
             onAddToFavorite = {},
             onDeleteFromFavorite = {},
@@ -165,7 +188,8 @@ private fun NoticeScreenPreview() {
             onTagFilterChange = {},
             onSearch = {},
             onMonthFilterChange = {},
-            onInitFilter = {}
+            onInitFilter = {},
+            onRefresh = {}
         )
     }
 }

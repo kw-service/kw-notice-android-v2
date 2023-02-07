@@ -31,6 +31,11 @@ internal object DataModule {
 
     @Provides
     @Singleton
+    @Named("KwDormNoticeUrl")
+    fun provideKwDormNoticeUrl(): String = BuildConfig.KW_DORM_NOTICE_URL
+
+    @Provides
+    @Singleton
     @Named("Preferences")
     fun providePreference(): String = "settings"
 

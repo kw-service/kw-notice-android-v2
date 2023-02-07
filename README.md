@@ -55,10 +55,10 @@ https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice
 # Screenshots
 
 <p>
-  <img width="22%" src="https://user-images.githubusercontent.com/72238126/180598029-2c5e78df-5fc9-4645-8ddf-c8702b7f0c7b.png">
-  <img width="22%" src="https://user-images.githubusercontent.com/72238126/180598032-71850a73-6a92-4512-88e6-a90ab4a3cffa.png">
-  <img width="22%" src="https://user-images.githubusercontent.com/72238126/180598038-c3263ad0-e227-4e03-9981-291d1d440e25.png">
-  <img width="22%" src="https://user-images.githubusercontent.com/72238126/180598039-8c7ae538-4140-407c-94a7-c91b71eb0ad5.png">
+  <img width="22%" src="https://user-images.githubusercontent.com/72238126/216070956-fa5cd3c6-4de0-47d8-9909-107b1a378326.png">
+  <img width="22%" src="https://user-images.githubusercontent.com/72238126/216070959-5446afb0-6c68-44ae-888f-27219e9e55fb.png">
+  <img width="22%" src="https://user-images.githubusercontent.com/72238126/216070964-676b09f6-2833-4bba-848d-f3aad30e2ad4.png">
+  <img width="22%" src="https://user-images.githubusercontent.com/72238126/216070969-91a6f571-2979-4463-b483-93648718ceec.png">
 </p>
 
 <br>

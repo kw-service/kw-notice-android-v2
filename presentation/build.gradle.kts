@@ -7,11 +7,10 @@ plugins {
 
 android {
     namespace = "dev.yjyoon.kwnotice.presentation"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 32
 
         vectorDrawables {
             useSupportLibrary = true
@@ -21,7 +20,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -31,7 +30,8 @@ android {
     }
     kotlinOptions {
         freeCompilerArgs += listOf(
-            "-Xopt-in=kotlin.RequiresOptIn",
+            "-X opt-in=kotlin.RequiresOptIn",
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
         )
@@ -42,18 +42,20 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.core)
+    implementation(libs.lifecycle.runtime)
 
     implementation(libs.bundles.compose)
 
-    implementation(libs.google.accompanist.webview)
-    implementation(libs.google.accompanist.systemuicontroller)
-    implementation(libs.google.accompanist.navigation.animation)
-    implementation(libs.google.accompanist.pager)
+    implementation(libs.accompanist.webview)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.navigation.animation)
+    implementation(libs.accompanist.pager)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
     coreLibraryDesugaring(libs.android.desugar)
+
+    debugImplementation(libs.compose.ui.tooling)
 }

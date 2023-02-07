@@ -15,5 +15,5 @@ object FavoriteConverter {
     fun dateToString(date: LocalDate): String = date.toString()
 
     @TypeConverter
-    fun stringToDate(string: String) = LocalDate.parse(string)
+    fun stringToDate(string: String): LocalDate = LocalDate.parse(string)
 }

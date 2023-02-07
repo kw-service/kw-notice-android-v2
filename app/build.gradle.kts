@@ -8,14 +8,14 @@ plugins {
 
 android {
     namespace = "dev.yjyoon.kwnotice"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "dev.yjyoon.kwnotice"
         minSdk = 24
-        targetSdk = 32
-        versionCode = 7
-        versionName = "2.1.0"
+        targetSdk = 33
+        versionCode = 10
+        versionName = "2.2.1"
     }
 
     buildTypes {
@@ -46,9 +46,9 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":presentation"))
 
-    implementation(platform(libs.google.firebase.bom))
-    implementation(libs.google.firebase.messaging)
-    implementation(libs.google.firebase.analytics)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

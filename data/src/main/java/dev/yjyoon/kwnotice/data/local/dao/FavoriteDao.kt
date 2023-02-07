@@ -21,6 +21,9 @@ interface FavoriteDao {
     @Query("SELECT id FROM favorite WHERE type = 'SwCentral'")
     suspend fun getSwCentralIds(): List<Long>
 
+    @Query("SELECT id FROM favorite WHERE type = 'KwDorm'")
+    suspend fun getKwDormIds(): List<Long>
+
     @Query("SELECT * FROM favorite")
     fun getAll(): Flow<List<FavoriteEntity>>
 }

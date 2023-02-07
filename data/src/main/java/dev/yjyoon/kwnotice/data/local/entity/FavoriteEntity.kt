@@ -15,7 +15,7 @@ data class FavoriteEntity(
     val date: LocalDate,
     val url: String
 ) {
-    enum class Type { KwHome, SwCentral }
+    enum class Type { KwHome, SwCentral, KwDorm, Unknown }
 }
 
 fun Favorite.toData() = FavoriteEntity(
@@ -24,6 +24,8 @@ fun Favorite.toData() = FavoriteEntity(
     type = when (type) {
         Favorite.Type.KwHome -> FavoriteEntity.Type.KwHome
         Favorite.Type.SwCentral -> FavoriteEntity.Type.SwCentral
+        Favorite.Type.KwDorm -> FavoriteEntity.Type.KwDorm
+        else -> FavoriteEntity.Type.Unknown
     },
     date = date,
     url = url
@@ -35,6 +37,8 @@ fun FavoriteEntity.toDomain() = Favorite(
     type = when (type) {
         FavoriteEntity.Type.KwHome -> Favorite.Type.KwHome
         FavoriteEntity.Type.SwCentral -> Favorite.Type.SwCentral
+        FavoriteEntity.Type.KwDorm -> Favorite.Type.KwDorm
+        else -> Favorite.Type.Unknown
     },
     date = date,
     url = url

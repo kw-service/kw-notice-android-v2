@@ -27,19 +27,6 @@ fun KwNoticeSwitchBar(
     onTap: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val icon: (@Composable () -> Unit)? = if (checked) {
-        {
-            Icon(
-                imageVector = Icons.Rounded.Check,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(SwitchDefaults.IconSize),
-            )
-        }
-    } else {
-        null
-    }
-
     Row(
         modifier.then(Modifier
             .height(56.dp)
@@ -51,8 +38,7 @@ fun KwNoticeSwitchBar(
         Text(title)
         Switch(
             checked = checked,
-            onCheckedChange = { onTap(it) },
-            thumbContent = icon
+            onCheckedChange = { onTap(it) }
         )
     }
 }
