@@ -1,12 +1,18 @@
-<br>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/72238126/180598251-9c2a726d-6618-45d6-8565-633290d395fa.png"/>
+</p>
 
-![image](https://user-images.githubusercontent.com/72238126/180598251-9c2a726d-6618-45d6-8565-633290d395fa.png)
+<h1 align="center">KW 알리미 for Android</h1>
 
-# KW Notice Android V2
+<p align="center">
+<img src="https://img.shields.io/badge/kotlin-1.7.20-A97BFF.svg"/>
+<img src="https://img.shields.io/badge/jetpack-compose-5675DF.svg"/>
+<img src="https://img.shields.io/badge/material-you-32A579.svg"/>
+<img src="https://img.shields.io/badge/license-Apache2.0-brightgreen.svg"/>
+</p>
 
-When a new notice is posted on the Kwangwoon University website, a push notification will be automatically sent to your device through the application. Also you can bookmark, search, and categorize notices on the application.
+**KW 알리미**는 광운대학교 홈페이지, SW중심대학사업단, 빛솔재 공공기숙사에 올라오는 공지사항들을 한 눈에 모아볼 수 있는 모바일 애플리케이션입니다. 알림 설정을 통해 원하는 공지사항이 올라올 때마다 **실시간 푸시 알림**을 받아볼 수 있습니다.
 
-https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice
 
 <br>
 
@@ -63,19 +69,7 @@ https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice
 
 <br>
 
-# License
-```
-Designed and developed by 2022 YJYOON (Yeojun Yoon)
+# Release
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+<a href='https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="20%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
