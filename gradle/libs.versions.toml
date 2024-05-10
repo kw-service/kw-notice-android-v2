@@ -1,44 +1,44 @@
 [versions]
-kotlin = "1.7.20"
-coroutines = "1.6.4"
+kotlin = "1.9.23"
+coroutines = "1.8.0"
+android-gradle-plugin = "8.4.0"
 
-android-gradle = "8.4.0"
-androidx-core = "1.9.0"
-androidx-lifecycle = "2.5.1"
-androidx-activity = "1.6.1"
-androidx-navigation = "2.5.3"
+androidx-core = "1.13.1"
+androidx-lifecycle = "2.7.0"
+androidx-activity = "1.9.0"
+androidx-navigation = "2.7.7"
 
-compose = "1.3.3"
-compose-compiler = "1.3.2"
-material = "1.3.1"
-material3 = "1.0.1"
-dagger = "2.44"
+compose = "1.6.7"
+compose-compiler = "1.5.13"
+material = "1.6.7"
+material3 = "1.2.1"
+dagger = "2.46.1"
 
-room = "2.5.0"
-datastore = "1.0.0"
+room = "2.6.1"
+datastore = "1.1.1"
 
-gms = "4.3.15"
-firebase = "31.2.0"
+gms = "4.4.1"
+firebase = "33.0.0"
 accompanist = "0.28.0"
 
-okhttp = "4.9.3"
+okhttp = "4.11.0"
 retrofit = "2.9.0"
-gson = "2.9.0"
+gson = "2.10.1"
 
-desugar = "1.2.2"
+desugar = "2.0.4"
 junit = "4.13.2"
 
 [libraries]
 # Android
-kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "android-gradle-plugin" }
+
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
-
-android-gradle = { module = "com.android.tools.build:gradle", version.ref = "android-gradle" }
-android-desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
-
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+
+android-desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
 
 # Compose
 compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "compose" }
