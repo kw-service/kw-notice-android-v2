@@ -5,13 +5,13 @@
 <h1 align="center">KW 알리미 for Android</h1>
 
 <p align="center">
-<img src="https://img.shields.io/badge/kotlin-1.7.20-A97BFF.svg"/>
+<img src="https://img.shields.io/badge/kotlin-1.9.30-A97BFF.svg"/>
 <img src="https://img.shields.io/badge/jetpack-compose-5675DF.svg"/>
 <img src="https://img.shields.io/badge/material-you-32A579.svg"/>
 <img src="https://img.shields.io/badge/license-Apache2.0-brightgreen.svg"/>
 </p>
 
-**KW 알리미**는 광운대학교 홈페이지, SW중심대학사업단, 빛솔재 공공기숙사에 올라오는 공지사항들을 한 눈에 모아볼 수 있는 모바일 애플리케이션입니다. 알림 설정을 통해 원하는 공지사항이 올라올 때마다 **실시간 푸시 알림**을 받아볼 수 있습니다.
+**KW 알리미**는 광운대학교 홈페이지에 올라오는 공지사항들을 한 눈에 모아볼 수 있는 모바일 애플리케이션입니다. 알림 설정을 통해 원하는 공지사항이 올라올 때마다 **실시간 푸시 알림**을 받아볼 수 있습니다.
 
 
 <br>
