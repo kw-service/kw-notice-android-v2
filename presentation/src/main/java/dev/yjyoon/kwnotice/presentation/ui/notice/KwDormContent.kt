@@ -29,6 +29,7 @@ import dev.yjyoon.kwnotice.domain.model.Notice
 import dev.yjyoon.kwnotice.domain.model.toFavorite
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeDropdownMenu
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeNoticeCard
 
 @Composable
 fun KwDormContent(
@@ -84,9 +85,11 @@ fun KwDormContent(
                 )
             }
         }
+
         KwDormNoticeUiState.Loading -> {
             CircularProgressIndicator()
         }
+
         KwDormNoticeUiState.Failure -> {
             FailureScreen(onRefresh = onRefresh)
         }
@@ -119,7 +122,7 @@ fun KwDormNoticeColumn(
             verticalArrangement = Arrangement.spacedBy(18.dp, Alignment.Top)
         ) {
             items(uiState.notices.filter { filterState.filtering(it) }) {
-                NoticeCard(
+                KwNoticeNoticeCard(
                     notice = it,
                     onClickNotice = onClickNotice,
                     bookmarked = favoriteNotices.contains(it.toFavorite()),

@@ -1,4 +1,4 @@
-package dev.yjyoon.kwnotice.presentation.ui.notice
+package dev.yjyoon.kwnotice.presentation.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,16 +8,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilledIconToggleButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.OutlinedIconToggleButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,14 +25,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.kwnotice.domain.model.Notice
 import dev.yjyoon.kwnotice.presentation.R
-import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeBadge
-import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeRoundRect
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 import dev.yjyoon.kwnotice.presentation.ui.util.DateDisplayUtil.toRelativeDateString
 import java.time.LocalDate
 
 @Composable
-fun NoticeCard(
+fun KwNoticeNoticeCard(
     notice: Notice,
     onClickNotice: (String) -> Unit,
     bookmarked: Boolean,
@@ -70,7 +64,10 @@ fun NoticeCard(
             FilledIconToggleButton(
                 checked = bookmarked,
                 onCheckedChange = { onToggleBookmark(notice, it) },
-                modifier = Modifier.padding(end = 12.dp)
+                modifier = Modifier.padding(end = 12.dp),
+                colors = IconButtonDefaults.filledIconToggleButtonColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                )
             ) {
                 Icon(
                     painter = if (bookmarked) {
@@ -81,6 +78,11 @@ fun NoticeCard(
                         )
                     },
                     contentDescription = null,
+                    tint = if (bookmarked) {
+                        MaterialTheme.colorScheme.onPrimary
+                    } else {
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                    },
                     modifier = Modifier.size(24.dp)
                 )
             }
@@ -150,7 +152,7 @@ private fun KwHomeNoticePreview() {
         modifiedDate = LocalDate.now()
     )
     KwNoticeTheme {
-        NoticeCard(
+        KwNoticeNoticeCard(
             notice = notice,
             onClickNotice = {},
             bookmarked = true,
@@ -168,7 +170,7 @@ private fun SwCentralNoticePreview() {
         postedDate = LocalDate.now()
     )
     KwNoticeTheme(useDarkTheme = true) {
-        NoticeCard(
+        KwNoticeNoticeCard(
             notice = notice,
             onClickNotice = {},
             bookmarked = false,
