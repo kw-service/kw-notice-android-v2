@@ -47,7 +47,7 @@ fun KwHomeContent(
         is KwHomeNoticeUiState.Success -> {
             Column(Modifier.fillMaxSize()) {
                 Row(
-                    Modifier.padding(horizontal = 18.dp, vertical = 8.dp)
+                    Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
                 ) {
                     KwNoticeDropdownMenu(
                         leadingIconRes = R.drawable.ic_tag,
@@ -55,7 +55,7 @@ fun KwHomeContent(
                         items = uiState.tags,
                         onSelectItem = onTagFilterChange
                     )
-                    Spacer(Modifier.width(8.dp))
+                    Spacer(Modifier.width(4.dp))
                     KwNoticeDropdownMenu(
                         modifier = Modifier.padding(end = 8.dp),
                         leadingIconRes = R.drawable.ic_group,
@@ -84,9 +84,16 @@ fun KwHomeContent(
             }
 
         }
+
         KwHomeNoticeUiState.Loading -> {
-            CircularProgressIndicator()
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
         }
+
         KwHomeNoticeUiState.Failure -> {
             FailureScreen(onRefresh = onRefresh)
         }
@@ -114,8 +121,8 @@ fun KwHomeNoticeColumn(
         modifier = Modifier.pullRefresh(pullRefreshState)
     ) {
         LazyColumn(
-            contentPadding = PaddingValues(horizontal = 18.dp, vertical = 0.dp),
-            verticalArrangement = Arrangement.spacedBy(18.dp, Alignment.Top),
+            contentPadding = PaddingValues(horizontal = 14.dp, vertical = 0.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
         ) {
             items(uiState.notices.filter { filterState.filtering(it) }) {
                 NoticeCard(

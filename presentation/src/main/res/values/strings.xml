@@ -39,8 +39,8 @@
     <string name="settings_notification_recruit">인원 모집 공지사항 등록 알림</string>
 
     <string name="settings_app_info">앱 정보</string>
-    <string name="settings_dev_info">개발 정보</string>
-    <string name="settings_dev_email">yjyoon.dev@gmail.com</string>
+    <string name="settings_dev_info">개발 정보 및 문의</string>
+    <string name="settings_dev_email">me@yjyoon.dev</string>
     <string name="settings_osl">오픈소스 라이센스</string>
     <string name="settings_version">버전</string>
     <string name="settings_copyright">"Copyright ⓒ %s All rights reserved."</string>

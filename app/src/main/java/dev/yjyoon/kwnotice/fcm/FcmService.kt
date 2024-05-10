@@ -1,5 +1,6 @@
 package dev.yjyoon.kwnotice.fcm
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -12,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage
 import dev.yjyoon.kwnotice.R
 import dev.yjyoon.kwnotice.presentation.ui.webview.WebViewActivity
 
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class FcmService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
@@ -55,7 +57,7 @@ class FcmService : FirebaseMessagingService() {
 
     companion object {
 
-        const val NOTIFICATION_CHANNEL_ID = "kw_notice_channel_id"
-        const val NOTIFICATION_CHANNEL_NAME = "kw_notice_channel_name"
+        private const val NOTIFICATION_CHANNEL_ID = "kw_notice_channel_id"
+        private const val NOTIFICATION_CHANNEL_NAME = "kw_notice_channel_name"
     }
 }

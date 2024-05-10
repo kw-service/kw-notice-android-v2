@@ -3,8 +3,12 @@ package dev.yjyoon.kwnotice.presentation.ui.main
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dev.yjyoon.kwnotice.domain.model.VersionName
+import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeNavigationBar
 import dev.yjyoon.kwnotice.presentation.ui.favorite.FavoriteScreen
 import dev.yjyoon.kwnotice.presentation.ui.notice.NoticeScreen
 import dev.yjyoon.kwnotice.presentation.ui.settings.SettingsScreen
@@ -41,7 +46,7 @@ fun MainScreen(
 
     Scaffold(
         bottomBar = {
-            MainNavigationBar(
+            KwNoticeNavigationBar(
                 currentDestination = currentDestination,
                 onNavigate = { navigation.navigateTo(it) }
             )
@@ -64,45 +69,3 @@ fun MainScreen(
         }
     }
 }
-
-@Composable
-fun MainNavigationBar(
-    currentDestination: NavDestination?,
-    onNavigate: (MainDestination) -> Unit
-) {
-    NavigationBar {
-        MainDestination.values().forEach { destination ->
-            val selected =
-                currentDestination?.hierarchy?.any { it.route == destination.route } == true
-
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        painter = painterResource(
-                            id = if (selected) destination.iconFilledResId else destination.iconOutlinedResId
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp)
-                    )
-                },
-                label = {
-                    Text(
-                        text = stringResource(id = destination.labelResId),
-                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
-                    )
-                },
-                selected = selected,
-                onClick = { onNavigate(destination) }
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun MainNavigationBarPreview() {
-    KwNoticeTheme {
-        MainNavigationBar(currentDestination = null, onNavigate = {})
-    }
-}
-

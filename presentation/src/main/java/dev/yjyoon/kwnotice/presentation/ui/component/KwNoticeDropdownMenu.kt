@@ -1,14 +1,22 @@
 package dev.yjyoon.kwnotice.presentation.ui.component
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Chip
+import androidx.compose.material.ChipDefaults
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SelectableChipColors
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -54,7 +62,8 @@ fun KwNoticeDropdownMenu(
                     contentDescription = null,
                     modifier = Modifier.size(12.dp)
                 )
-            }
+            },
+            border = BorderStroke(width = 0.dp, color = MaterialTheme.colorScheme.background)
         )
         DropdownMenu(
             expanded = expanded,

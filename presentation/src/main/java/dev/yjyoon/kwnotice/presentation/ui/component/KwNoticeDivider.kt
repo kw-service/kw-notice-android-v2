@@ -15,6 +15,6 @@ fun KwNoticeDivider(
 ) {
     Divider(
         Modifier.padding(horizontal = horizontalPadding, vertical = verticalPadding),
-        color = MaterialTheme.colorScheme.surfaceVariant
+        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f)
     )
 }
