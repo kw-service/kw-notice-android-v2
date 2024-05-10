@@ -13,8 +13,8 @@ android {
     defaultConfig {
         applicationId = "dev.yjyoon.kwnotice"
         minSdk = 24
-        versionCode = 11
-        versionName = "2.2.1"
+        versionCode = 12
+        versionName = "2.3.0"
     }
 
     buildTypes {
