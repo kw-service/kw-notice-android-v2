@@ -88,9 +88,11 @@ fun SettingsScreen(
                 versionName = versionName
             )
         }
+
         SettingsUiState.Loading -> {
             KwNoticeLoading()
         }
+
         SettingsUiState.Failure -> {}
     }
 }
@@ -135,36 +137,42 @@ fun SettingsContent(
             onUnsubscribe = onUnsubscribe
         )
         KwNoticeDivider()
-        SettingsTitle(
-            Modifier.padding(horizontal = 16.dp),
-            text = stringResource(id = R.string.sw_central)
-        )
-        Spacer(Modifier.height(4.dp))
-        FcmTopicSwitchBar(
-            uiState = uiState,
-            fcmTopicModel = FcmTopicModel(FcmTopic.SwCentralNew),
-            onSubscribe = onSubscribe,
-            onUnsubscribe = onUnsubscribe
-        )
-        KwNoticeDivider()
-        SettingsTitle(
-            Modifier.padding(horizontal = 16.dp),
-            text = stringResource(id = R.string.kw_dorm)
-        )
-        Spacer(Modifier.height(4.dp))
-        FcmTopicSwitchBar(
-            uiState = uiState,
-            fcmTopicModel = FcmTopicModel(FcmTopic.KwDormCommon),
-            onSubscribe = onSubscribe,
-            onUnsubscribe = onUnsubscribe
-        )
-        FcmTopicSwitchBar(
-            uiState = uiState,
-            fcmTopicModel = FcmTopicModel(FcmTopic.KwDormRecruitment),
-            onSubscribe = onSubscribe,
-            onUnsubscribe = onUnsubscribe
-        )
-        KwNoticeDivider()
+        /*
+         * 광운대학교의 SW중심대학사업단 사업 종료 및 빛솔재 공지사항 알림 서비스 지원의 어려움에 따라
+         * v2.3.0 에서 광운대학교 홈페이지 공지사항 탭을 제외한 모든 탭을 제거.
+         * 추후 유지보수를 위해 기존 코드를 제거하지 않고 주석처리 함.
+         * https://github.com/kw-service/kw-notice-android-v2/issues/84
+         */
+//        SettingsTitle(
+//            Modifier.padding(horizontal = 16.dp),
+//            text = stringResource(id = R.string.sw_central)
+//        )
+//        Spacer(Modifier.height(4.dp))
+//        FcmTopicSwitchBar(
+//            uiState = uiState,
+//            fcmTopicModel = FcmTopicModel(FcmTopic.SwCentralNew),
+//            onSubscribe = onSubscribe,
+//            onUnsubscribe = onUnsubscribe
+//        )
+//        KwNoticeDivider()
+//        SettingsTitle(
+//            Modifier.padding(horizontal = 16.dp),
+//            text = stringResource(id = R.string.kw_dorm)
+//        )
+//        Spacer(Modifier.height(4.dp))
+//        FcmTopicSwitchBar(
+//            uiState = uiState,
+//            fcmTopicModel = FcmTopicModel(FcmTopic.KwDormCommon),
+//            onSubscribe = onSubscribe,
+//            onUnsubscribe = onUnsubscribe
+//        )
+//        FcmTopicSwitchBar(
+//            uiState = uiState,
+//            fcmTopicModel = FcmTopicModel(FcmTopic.KwDormRecruitment),
+//            onSubscribe = onSubscribe,
+//            onUnsubscribe = onUnsubscribe
+//        )
+//        KwNoticeDivider()
         SettingsTitle(
             Modifier.padding(horizontal = 16.dp),
             text = stringResource(id = R.string.settings_app_info)
