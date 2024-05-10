@@ -23,7 +23,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -38,12 +37,10 @@ import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTypography
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun KwNoticeSearchBar(
     modifier: Modifier = Modifier,
-    onSearch: (String) -> Unit,
-    onClose: () -> Unit,
+    onSearch: (String) -> Unit
 ) {
     var text by remember { mutableStateOf("") }
     val color = if (isSystemInDarkTheme()) Color.White else Color.Black
@@ -77,7 +74,7 @@ fun KwNoticeSearchBar(
                     Icon(imageVector = Icons.Default.Search, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     Box(modifier = Modifier.weight(1f)) {
-                        if(text.isEmpty()) {
+                        if (text.isEmpty()) {
                             Text(
                                 stringResource(id = R.string.searchbar_placeholder),
                                 color = color.copy(alpha = 0.15f),
@@ -101,6 +98,6 @@ fun KwNoticeSearchBar(
 @Composable
 fun KwNoticeSearchBarPreview() {
     KwNoticeTheme {
-        KwNoticeSearchBar(onSearch = {}, onClose = {})
+        KwNoticeSearchBar(onSearch = {})
     }
 }
