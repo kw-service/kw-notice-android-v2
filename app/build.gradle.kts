@@ -8,12 +8,11 @@ plugins {
 
 android {
     namespace = "dev.yjyoon.kwnotice"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "dev.yjyoon.kwnotice"
         minSdk = 24
-        targetSdk = 33
         versionCode = 11
         versionName = "2.2.1"
     }
