@@ -8,10 +8,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilledIconToggleButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.OutlinedIconToggleButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,12 +44,12 @@ fun NoticeCard(
 ) {
     ElevatedCard(
         onClick = { onClickNotice(notice.url) },
-        modifier = Modifier.height(IntrinsicSize.Min)
+        modifier = Modifier.height(IntrinsicSize.Min),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = (0.5).dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            KwNoticeRoundRect(width = 4.dp, radius = 0.dp)
             Column(
                 Modifier
                     .padding(start = 12.dp, top = 12.dp, end = 8.dp, bottom = 10.dp)
@@ -88,6 +94,7 @@ fun NoticeTitle(notice: Notice) {
         is Notice.KwHome -> {
             notice.title.substring(notice.tag.length + 3)
         }
+
         else -> {
             notice.title
         }
@@ -108,6 +115,7 @@ fun NoticeDateBadge(notice: Notice) {
         is Notice.KwHome -> {
             notice.modifiedDate
         }
+
         else -> {
             notice.postedDate
         }

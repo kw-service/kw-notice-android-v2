@@ -3,29 +3,18 @@ package dev.yjyoon.kwnotice.presentation.ui.notice
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import dev.yjyoon.kwnotice.domain.model.Favorite
 import dev.yjyoon.kwnotice.domain.model.Notice
 import dev.yjyoon.kwnotice.presentation.R
 import dev.yjyoon.kwnotice.presentation.ui.component.KwNoticeSearchTopAppBar
 import dev.yjyoon.kwnotice.presentation.ui.theme.KwNoticeTheme
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 @Composable
@@ -53,7 +42,7 @@ fun NoticeScreen(
     )
 }
 
-@OptIn(ExperimentalPagerApi::class)
+// @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun NoticeScreen(
     uiState: NoticeUiState,
@@ -70,85 +59,93 @@ fun NoticeScreen(
     onInitFilter: () -> Unit,
     onRefresh: (NoticeTab) -> Unit,
 ) {
-    val pagerState = rememberPagerState()
-    val coroutineScope = rememberCoroutineScope()
-
-    var showSearchBar by remember { mutableStateOf(false) }
+    /*
+     * 광운대학교의 SW중심대학사업단 사업 종료 및 빛솔재 공지사항 알림 서비스 지원의 어려움에 따라
+     * v2.3.0 에서 광운대학교 홈페이지 공지사항 탭을 제외한 모든 탭을 제거.
+     * 추후 유지보수를 위해 기존 코드를 제거하지 않고 주석처리 함.
+     * https://github.com/kw-service/kw-notice-android-v2/issues/84
+     */
+//    val pagerState = rememberPagerState()
+//    val coroutineScope = rememberCoroutineScope()
 
     Box(
         Modifier.fillMaxSize()
     ) {
-        Column {
+        Column(
+            Modifier.fillMaxSize()
+        ) {
             KwNoticeSearchTopAppBar(
                 titleText = stringResource(id = R.string.navigation_notice),
                 onSearch = onSearch,
                 onCloseSearch = onInitFilter
             )
-            TabRow(
-                selectedTabIndex = pagerState.currentPage,
-            ) {
-                NoticeTab.values().forEachIndexed { index, tab ->
-                    Tab(
-                        text = { Text(stringResource(id = tab.textRes)) },
-                        selected = pagerState.currentPage == index,
-                        onClick = {
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(page = index)
-                            }
-                        },
-                    )
-                }
-            }
-            HorizontalPager(
-                count = NoticeTab.values().size,
-                state = pagerState,
-                modifier = Modifier.fillMaxSize()
-            ) { tab ->
-                when (tab) {
-                    NoticeTab.KwHome.ordinal -> {
-                        KwHomeContent(
-                            uiState = uiState.kwHomeNoticeUiState,
-                            onClickNotice = onClickNotice,
-                            onAddToFavorite = onAddToFavorite,
-                            onDeleteFromFavorite = onDeleteFromFavorite,
-                            favoriteNotices = favoriteNotices,
-                            filterState = filterState,
-                            onTagFilterChange = onTagFilterChange,
-                            onDepartmentFilterChange = onDepartmentFilterChange,
-                            onMonthFilterChange = onMonthFilterChange,
-                            refreshing = refreshing,
-                            onRefresh = { onRefresh(NoticeTab.KwHome) }
-                        )
-                    }
-                    NoticeTab.SwCentral.ordinal -> {
-                        SwCentralContent(
-                            uiState = uiState.swCentralNoticeUiState,
-                            onClickNotice = onClickNotice,
-                            onAddToFavorite = onAddToFavorite,
-                            onDeleteFromFavorite = onDeleteFromFavorite,
-                            favoriteNotices = favoriteNotices,
-                            filterState = filterState,
-                            onMonthFilterChange = onMonthFilterChange,
-                            refreshing = refreshing,
-                            onRefresh = { onRefresh(NoticeTab.SwCentral) }
-                        )
-                    }
-                    NoticeTab.KwDorm.ordinal -> {
-                        KwDormContent(
-                            uiState = uiState.kwDormNoticeUiState,
-                            onClickNotice = onClickNotice,
-                            onAddToFavorite = onAddToFavorite,
-                            onDeleteFromFavorite = onDeleteFromFavorite,
-                            favoriteNotices = favoriteNotices,
-                            filterState = filterState,
-                            onMonthFilterChange = onMonthFilterChange,
-                            refreshing = refreshing,
-                            onRefresh = { onRefresh(NoticeTab.KwDorm) }
-                        )
-                    }
-                }
-            }
+//            TabRow(
+//                selectedTabIndex = pagerState.currentPage,
+//            ) {
+//                NoticeTab.entries.forEachIndexed { index, tab ->
+//                    Tab(
+//                        text = { Text(stringResource(id = tab.textRes)) },
+//                        selected = pagerState.currentPage == index,
+//                        onClick = {
+//                            coroutineScope.launch {
+//                                pagerState.animateScrollToPage(page = index)
+//                            }
+//                        },
+//                    )
+//                }
+//            }
+//            HorizontalPager(
+//                count = NoticeTab.entries.size,
+//                state = pagerState,
+//                modifier = Modifier.fillMaxSize()
+//            ) { tab ->
+//                when (tab) {
+//                    NoticeTab.KwHome.ordinal -> {
+            KwHomeContent(
+                uiState = uiState.kwHomeNoticeUiState,
+                onClickNotice = onClickNotice,
+                onAddToFavorite = onAddToFavorite,
+                onDeleteFromFavorite = onDeleteFromFavorite,
+                favoriteNotices = favoriteNotices,
+                filterState = filterState,
+                onTagFilterChange = onTagFilterChange,
+                onDepartmentFilterChange = onDepartmentFilterChange,
+                onMonthFilterChange = onMonthFilterChange,
+                refreshing = refreshing,
+                onRefresh = { onRefresh(NoticeTab.KwHome) }
+            )
         }
+//
+//                    NoticeTab.SwCentral.ordinal -> {
+//                        SwCentralContent(
+//                            uiState = uiState.swCentralNoticeUiState,
+//                            onClickNotice = onClickNotice,
+//                            onAddToFavorite = onAddToFavorite,
+//                            onDeleteFromFavorite = onDeleteFromFavorite,
+//                            favoriteNotices = favoriteNotices,
+//                            filterState = filterState,
+//                            onMonthFilterChange = onMonthFilterChange,
+//                            refreshing = refreshing,
+//                            onRefresh = { onRefresh(NoticeTab.SwCentral) }
+//                        )
+//                    }
+//
+//                    NoticeTab.KwDorm.ordinal -> {
+//                        KwDormContent(
+//                            uiState = uiState.kwDormNoticeUiState,
+//                            onClickNotice = onClickNotice,
+//                            onAddToFavorite = onAddToFavorite,
+//                            onDeleteFromFavorite = onDeleteFromFavorite,
+//                            favoriteNotices = favoriteNotices,
+//                            filterState = filterState,
+//                            onMonthFilterChange = onMonthFilterChange,
+//                            refreshing = refreshing,
+//                            onRefresh = { onRefresh(NoticeTab.KwDorm) }
+//                        )
+//                    }
+//                }
+//            }
+//        }
     }
 }
 
