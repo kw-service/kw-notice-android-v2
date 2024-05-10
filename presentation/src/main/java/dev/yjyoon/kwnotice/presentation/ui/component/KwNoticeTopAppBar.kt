@@ -107,23 +107,23 @@ fun KwNoticeSearchTopAppBar(
                         slideInHorizontally { -it } + fadeIn() with
                                 slideOutHorizontally { it } + fadeOut()
                     }.using(SizeTransform(clip = false))
-                }
+                },
+                label = "AnimatedSearchBar"
             ) { targetState ->
                 if (targetState) {
                     KwNoticeSearchBar(
                         Modifier.fillMaxWidth(),
-                        onSearch = onSearch,
-                        onClose = {
-                            onCloseSearch()
-                            showSearchBar = false
-                        }
+                        onSearch = onSearch
                     )
                 }
             }
         },
         actions = {
             IconButton(
-                onClick = { showSearchBar = !showSearchBar }
+                onClick = {
+                    showSearchBar = !showSearchBar
+                    if (showSearchBar.not()) onCloseSearch()
+                }
             ) {
                 Icon(
                     imageVector = if (showSearchBar) Icons.Default.Close else Icons.Default.Search,
