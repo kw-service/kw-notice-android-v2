@@ -12,7 +12,7 @@ properties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "dev.yjyoon.kwnotice.data"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
